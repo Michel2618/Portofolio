@@ -1,0 +1,132 @@
+.skillsSection {
+    padding: 4rem 1rem;
+}
+
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.sectionHeader h2 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 2rem;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.headerLine {
+    display: inline-block;
+    height: 1px;
+    width: 250px;
+    background-color: var(--accent-purple);
+}
+
+.skillsContent {
+    display: flex;
+    gap: 4rem;
+    align-items: flex-start;
+}
+
+.skillsVisual {
+    flex: 1;
+    position: relative;
+    min-height: 250px;
+}
+
+.decorativeBoxes {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.box1,
+.box2,
+.box3,
+.box4 {
+    position: absolute;
+    border: 1px solid;
+}
+
+.box1 {
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 80px;
+    border-color: var(--accent-green);
+    opacity: 0.8;
+}
+
+.box2 {
+    top: 40px;
+    left: 40px;
+    width: 60px;
+    height: 60px;
+    border-color: var(--accent-purple);
+    opacity: 0.6;
+}
+
+.box3 {
+    bottom: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    border-color: var(--text-secondary);
+    opacity: 0.4;
+}
+
+.box4 {
+    bottom: 40px;
+    right: 40px;
+    width: 50px;
+    height: 50px;
+    border-color: var(--accent-green);
+    opacity: 0.9;
+}
+
+.skillsGrid {
+    flex: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.skillBox {
+    border: 1px solid var(--text-secondary);
+    transition: transform 0.2s;
+}
+
+.skillBox:hover {
+    transform: translateY(-3px);
+    border-color: var(--text-primary);
+}
+
+.skillTitle {
+    padding: 0.5rem 1rem;
+    color: var(--text-primary);
+    font-family: var(--font-fira-code), monospace;
+    font-weight: 600;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--text-secondary);
+}
+
+.skillList {
+    padding: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .skillsContent {
+        flex-direction: column;
+    }
+
+    .skillsVisual {
+        display: none;
+    }
+}

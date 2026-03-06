@@ -1,0 +1,133 @@
+.projectsSection {
+    padding: 4rem 1rem;
+}
+
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.sectionHeader h2 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 2rem;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.headerLine {
+    display: inline-block;
+    height: 1px;
+    width: 300px;
+    background-color: var(--accent-purple);
+}
+
+.viewAll {
+    color: var(--text-primary);
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.viewAll:hover {
+    color: var(--text-secondary);
+}
+
+.projectsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.projectCard {
+    border: 1px solid var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.projectCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.projectImage {
+    height: 200px;
+    background-color: #2c313a;
+    border-bottom: 1px solid var(--text-secondary);
+    position: relative;
+    overflow: hidden;
+}
+
+.projectImage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(45deg,
+            transparent,
+            transparent 10px,
+            rgba(195, 232, 141, 0.05) 10px,
+            rgba(195, 232, 141, 0.05) 20px);
+}
+
+.projectTech {
+    padding: 0.5rem 1rem;
+    color: var(--text-secondary);
+    font-family: var(--font-fira-code), monospace;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--text-secondary);
+}
+
+.projectInfo {
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.projectTitle {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.projectDesc {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    flex: 1;
+}
+
+.projectLinks {
+    display: flex;
+    gap: 1rem;
+}
+
+.primaryBtn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--accent-green);
+    color: var(--text-primary);
+    font-family: var(--font-fira-code), monospace;
+    transition: all 0.2s;
+    background: transparent;
+    cursor: pointer;
+}
+
+.primaryBtn:hover {
+    background: rgba(195, 232, 141, 0.1);
+}
+
+@media (max-width: 768px) {
+    .headerLine {
+        width: 50px;
+    }
+
+    .sectionHeader h2 {
+        font-size: 1.5rem;
+    }
+}

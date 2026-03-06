@@ -1,0 +1,52 @@
+.quoteSection {
+    display: flex;
+    justify-content: center;
+    padding: 4rem 1rem;
+}
+
+.quoteBox {
+    position: relative;
+    display: inline-block;
+}
+
+.quoteText {
+    padding: 2rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+    border: 1px solid var(--text-secondary);
+    color: var(--text-primary);
+}
+
+.quoteAuthor {
+    padding: 1rem 2rem;
+    border: 1px solid var(--text-secondary);
+    border-top: none;
+    display: inline-block;
+    float: right;
+    color: var(--text-primary);
+}
+
+.quoteDecorTop {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background-color: var(--bg-dark);
+    padding: 0 0.5rem;
+    font-family: serif;
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--accent-green);
+}
+
+.quoteDecorBottom {
+    position: absolute;
+    bottom: 40px;
+    /* adjusted because of author box */
+    right: 10px;
+    background-color: var(--bg-dark);
+    padding: 0 0.5rem;
+    font-family: serif;
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--accent-green);
+}

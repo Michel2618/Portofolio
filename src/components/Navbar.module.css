@@ -1,0 +1,86 @@
+.header {
+    padding: 2rem 0;
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-dark);
+    z-index: 100;
+}
+
+.navContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-fira-code), monospace;
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.logoLink {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logoImage {
+    display: block;
+}
+
+.logoIcon {
+    color: var(--text-primary);
+}
+
+.navLinks {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    font-family: var(--font-fira-code), monospace;
+    font-size: 0.9rem;
+}
+
+.navLinks a {
+    color: var(--text-secondary);
+    transition: color 0.2s;
+}
+
+.navLinks a:hover,
+.navLinks a:active {
+    color: var(--text-primary);
+}
+
+.languageSelector {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--text-secondary);
+}
+
+.languageSelector:hover {
+    color: var(--text-primary);
+}
+
+.dropdownArrow {
+    font-size: 0.6rem;
+}
+
+.mobileMenuBtn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .navLinks {
+        display: none;
+    }
+
+    .mobileMenuBtn {
+        display: block;
+    }
+}

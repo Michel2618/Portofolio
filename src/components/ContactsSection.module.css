@@ -1,0 +1,85 @@
+.contactsSection {
+    padding: 4rem 1rem;
+}
+
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.sectionHeader h2 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 2rem;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.headerLine {
+    display: inline-block;
+    height: 1px;
+    width: 150px;
+    background-color: var(--accent-purple);
+}
+
+.contactsContent {
+    display: flex;
+    gap: 4rem;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.contactsText {
+    flex: 1;
+    max-width: 500px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.contactsBox {
+    border: 1px solid var(--text-secondary);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.boxTitle {
+    color: var(--text-primary);
+    font-family: var(--font-fira-code), monospace;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.contactMethods {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.contactItem {
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s;
+}
+
+.contactItem:hover {
+    color: var(--text-primary);
+}
+
+.icon {
+    color: var(--text-secondary);
+    font-family: var(--font-fira-code), monospace;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .contactsContent {
+        flex-direction: column;
+    }
+}
