@@ -1,6 +1,31 @@
 .contactsSection {
-    padding: 4rem 1rem;
+    padding: 4rem 0;
+    position: relative;
+    overflow: hidden;
 }
+
+/* Decorative scattered elements */
+.bgDots1 {
+    position: absolute;
+    top: 6%;
+    left: 0;
+    pointer-events: none;
+}
+
+.bgSquare1 {
+    position: absolute;
+    top: 6%;
+    right: 0;
+    pointer-events: none;
+}
+
+.bgOverlap1 {
+    position: absolute;
+    bottom: 8%;
+    right: 0;
+    pointer-events: none;
+}
+
 
 .sectionHeader {
     display: flex;

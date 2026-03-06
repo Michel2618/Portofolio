@@ -1,9 +1,16 @@
 import Link from 'next/link';
 import styles from './AboutSection.module.css';
+import { DotGrid, OutlineSquare, OverlapBoxes } from './DecorativeElements';
 
 export default function AboutSection() {
     return (
         <section className={`container ${styles.aboutSection}`} id="about-me">
+            {/* Decorative elements */}
+            <DotGrid className={styles.bgDots1} />
+            <OutlineSquare size={105} color="secondary" className={styles.bgSquare1} />
+            <OverlapBoxes color="green" className={styles.bgOverlap1} />
+            <OutlineSquare size={60} color="secondary" className={styles.bgSquare2} />
+
             <div className={styles.sectionHeader}>
                 <h2 className="font-mono text-2xl">
                     <span className="heading-accent">#</span>about-me
@@ -13,10 +20,10 @@ export default function AboutSection() {
 
             <div className={styles.aboutContent}>
                 <div className={styles.aboutText}>
-                    <p>Hello, i'm Elias!</p>
+                    <p>Hello, i&apos;m Elias!</p>
                     <br />
                     <p>
-                        I'm a self-taught front-end developer based in Kyiv, Ukraine.
+                        I&apos;m a self-taught front-end developer based in Kyiv, Ukraine.
                         I can develop responsive websites from scratch and raise them into modern user-friendly web experiences.
                     </p>
                     <br />

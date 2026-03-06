@@ -6,7 +6,46 @@
     gap: 2rem;
     padding-top: 4rem;
     padding-bottom: 4rem;
+    position: relative;
+    overflow: hidden;
 }
+
+/* Decorative background elements */
+.bgDots1 {
+    position: absolute;
+    top: 10%;
+    left: 0;
+    pointer-events: none;
+}
+
+.bgDots2 {
+    position: absolute;
+    bottom: 15%;
+    right: 0;
+    pointer-events: none;
+}
+
+.bgSquare1 {
+    position: absolute;
+    top: 8%;
+    right: 8%;
+    pointer-events: none;
+}
+
+.bgSquare2 {
+    position: absolute;
+    bottom: 20%;
+    right: 12%;
+    pointer-events: none;
+}
+
+.bgOverlap1 {
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+    pointer-events: none;
+}
+
 
 .heroContent {
     flex: 1;

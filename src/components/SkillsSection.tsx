@@ -1,4 +1,5 @@
 import styles from './SkillsSection.module.css';
+import { DotGrid, OutlineSquare, OverlapBoxes } from './DecorativeElements';
 
 const skillCategories = [
     {
@@ -26,6 +27,12 @@ const skillCategories = [
 export default function SkillsSection() {
     return (
         <section className={`container ${styles.skillsSection}`} id="about-me">
+            {/* Decorative elements */}
+            <OutlineSquare size={120} color="secondary" className={styles.bgSquare1} />
+            <DotGrid className={styles.bgDots1} />
+            <OverlapBoxes color="purple" className={styles.bgOverlap1} />
+            <OutlineSquare size={65} color="secondary" className={styles.bgSquare2} />
+
             <div className={styles.sectionHeader}>
                 <h2 className="font-mono text-2xl">
                     <span className="heading-accent">#</span>skills

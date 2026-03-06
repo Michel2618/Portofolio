@@ -1,6 +1,38 @@
 .skillsSection {
-    padding: 4rem 1rem;
+    padding: 4rem 0;
+    position: relative;
+    overflow: hidden;
 }
+
+/* Decorative scattered elements */
+.bgSquare1 {
+    position: absolute;
+    top: 4%;
+    right: 0;
+    pointer-events: none;
+}
+
+.bgSquare2 {
+    position: absolute;
+    bottom: 10%;
+    right: 14%;
+    pointer-events: none;
+}
+
+.bgDots1 {
+    position: absolute;
+    top: 6%;
+    left: 0;
+    pointer-events: none;
+}
+
+.bgOverlap1 {
+    position: absolute;
+    bottom: 6%;
+    right: 0;
+    pointer-events: none;
+}
+
 
 .sectionHeader {
     display: flex;

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styles from './ProjectsSection.module.css';
+import { DotGrid, OutlineSquare, OverlapBoxes } from './DecorativeElements';
 
 const projects = [
     {
@@ -28,6 +29,13 @@ const projects = [
 export default function ProjectsSection() {
     return (
         <section className={`container ${styles.projectsSection}`} id="works">
+            {/* Decorative elements */}
+            <OutlineSquare size={110} color="secondary" className={styles.bgSquare1} />
+            <DotGrid className={styles.bgDots1} />
+            <OverlapBoxes color="green" className={styles.bgOverlap1} />
+            <DotGrid className={styles.bgDots2} />
+            <OutlineSquare size={70} color="secondary" className={styles.bgSquare2} />
+
             <div className={styles.sectionHeader}>
                 <h2 className="font-mono text-2xl">
                     <span className="heading-accent">#</span>projects

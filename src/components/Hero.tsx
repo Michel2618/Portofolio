@@ -1,9 +1,17 @@
 import Link from 'next/link';
 import styles from './Hero.module.css';
+import { DotGrid, OutlineSquare, OverlapBoxes } from './DecorativeElements';
 
 export default function Hero() {
     return (
         <section className={`container ${styles.hero}`} id="home">
+            {/* Background decorative scatter */}
+            <DotGrid className={styles.bgDots1} />
+            <OutlineSquare size={100} color="secondary" className={styles.bgSquare1} />
+            <OverlapBoxes color="green" className={styles.bgOverlap1} />
+            <DotGrid className={styles.bgDots2} />
+            <OutlineSquare size={60} color="secondary" className={styles.bgSquare2} />
+
             <div className={styles.heroContent}>
                 <h1 className={styles.title}>
                     Elias is a <span className="heading-accent">web designer</span> and <span className="heading-accent">front-end developer</span>
