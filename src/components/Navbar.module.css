@@ -1,37 +1,62 @@
+/* ── Header shell ── */
 .header {
-    padding: 2rem 0;
-    position: sticky;
+    padding: 0.6rem 0;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     background-color: var(--bg-dark);
     z-index: 100;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.35s ease, opacity 0.35s ease;
 }
 
+/* Scroll-state classes toggled by JS */
+.headerVisible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.headerHidden {
+    transform: translateY(-110%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ── Container row ── */
 .navContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 70px;
+    /* fixed height so logo size can't inflate the bar */
 }
 
+/* ── Logo ── */
 .logo {
     font-family: var(--font-fira-code), monospace;
     font-weight: 700;
     font-size: 1.25rem;
+    flex-shrink: 0;
 }
 
 .logoLink {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    line-height: 1;
 }
 
 .logoImage {
+    /* keeps image at 70×70 but won't stretch the flex row height */
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
     display: block;
+    flex-shrink: 0;
 }
 
-.logoIcon {
-    color: var(--text-primary);
-}
-
+/* ── Desktop nav links ── */
 .navLinks {
     display: flex;
     gap: 2rem;
@@ -50,6 +75,7 @@
     color: var(--text-primary);
 }
 
+/* ── Language pill ── */
 .languageSelector {
     display: flex;
     align-items: center;
@@ -67,17 +93,43 @@
     font-size: 0.6rem;
 }
 
+/* ── Mobile hamburger button ── */
 .mobileMenuBtn {
     display: none;
     background: none;
     border: none;
     color: var(--text-primary);
     cursor: pointer;
+    padding: 0.25rem;
 }
 
+/* ── Mobile responsive ── */
 @media (max-width: 768px) {
+    .navContainer {
+        position: relative;
+    }
+
     .navLinks {
+        /* hidden by default on mobile */
         display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.25rem;
+        position: absolute;
+        top: 100%;
+        /* sits right below the nav bar */
+        left: 0;
+        right: 0;
+        background-color: var(--bg-dark);
+        padding: 1.25rem var(--container-padding, 1.5rem);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        z-index: 200;
+    }
+
+    /* JS toggles this class to show the drawer */
+    .navLinksOpen {
+        display: flex;
     }
 
     .mobileMenuBtn {

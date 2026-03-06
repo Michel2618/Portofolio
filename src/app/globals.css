@@ -4,6 +4,7 @@
   --accent-purple: #C778DD;
   --text-primary: #FFFFFF;
   --text-secondary: #ABB2BF;
+  --navbar-height: 70px;
 }
 
 * {
@@ -20,6 +21,7 @@ body {
   color: var(--text-primary);
   font-family: var(--font-inter), sans-serif;
   scroll-behavior: smooth;
+  padding-top: var(--navbar-height);
 }
 
 h1,

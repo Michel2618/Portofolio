@@ -1,32 +1,74 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { useState, useEffect, useRef } from 'react';
 import styles from './Navbar.module.css';
-import { Menu } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 export default function Navbar() {
+    const [visible, setVisible] = useState(true);
+    const [mobileOpen, setMobileOpen] = useState(false);
+    const lastScrollY = useRef(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentY = window.scrollY;
+            // Show when scrolling up OR near top of page
+            if (currentY < lastScrollY.current || currentY < 80) {
+                setVisible(true);
+            } else {
+                setVisible(false);
+                setMobileOpen(false); // close mobile menu when hiding
+            }
+            lastScrollY.current = currentY;
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     return (
-        <header className={styles.header}>
+        <header className={`${styles.header} ${visible ? styles.headerVisible : styles.headerHidden}`}>
             <div className={`container ${styles.navContainer}`}>
                 <div className={styles.logo}>
                     <Link href="/" className={styles.logoLink}>
-                        <Image src="/michel_site_logo.png" alt="Michel Logo" width={50} height={50} className={styles.logoImage} />
+                        <Image
+                            src="/michel_site_logo.png"
+                            alt="Michel Logo"
+                            width={70}
+                            height={70}
+                            className={styles.logoImage}
+                        />
                         Michel
                     </Link>
                 </div>
 
-                <nav className={styles.navLinks}>
-                    <Link href="#home"><span className="heading-accent">#</span>home</Link>
-                    <Link href="#works"><span className="heading-accent">#</span>works</Link>
-                    <Link href="#about-me"><span className="heading-accent">#</span>about-me</Link>
-                    <Link href="#contacts"><span className="heading-accent">#</span>contacts</Link>
+                <nav className={`${styles.navLinks} ${mobileOpen ? styles.navLinksOpen : ''}`}>
+                    <Link href="#home" onClick={() => setMobileOpen(false)}>
+                        <span className="heading-accent">#</span>home
+                    </Link>
+                    <Link href="#works" onClick={() => setMobileOpen(false)}>
+                        <span className="heading-accent">#</span>works
+                    </Link>
+                    <Link href="#about-me" onClick={() => setMobileOpen(false)}>
+                        <span className="heading-accent">#</span>about-me
+                    </Link>
+                    <Link href="#contacts" onClick={() => setMobileOpen(false)}>
+                        <span className="heading-accent">#</span>contacts
+                    </Link>
 
                     <div className={styles.languageSelector}>
                         EN <span className={styles.dropdownArrow}>▼</span>
                     </div>
                 </nav>
 
-                <button className={styles.mobileMenuBtn} aria-label="Toggle menu">
-                    <Menu size={24} />
+                <button
+                    className={styles.mobileMenuBtn}
+                    aria-label="Toggle menu"
+                    onClick={() => setMobileOpen(prev => !prev)}
+                >
+                    {mobileOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
             </div>
         </header>

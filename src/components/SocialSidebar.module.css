@@ -1,25 +1,53 @@
+/* ── Sidebar wrapper ── */
 .sidebar {
     position: fixed;
-    left: 20px;
-    top: 0;
+    left: 0;
+    top: var(--navbar-height, 70px);
+    /* sit exactly below the navbar */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    z-index: 100;
+    align-items: flex-start;
+    z-index: 50;
+    /* below navbar (z:100) */
+    background-color: #282c33;
 }
 
-.line {
+/* ── L-shaped connector ── */
+.lConnector {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 20px;
+    margin-top: 1.5rem;
+}
+
+/* Horizontal arm: goes from the very left edge to the icon centre */
+.lineH {
+    width: 22px;
+    /* bridges the 20px left padding gap */
+    height: 2px;
+    background-color: var(--text-secondary);
+    margin-left: -20px;
+    /* pull it flush with the left edge */
+    /* align it vertically at the mid-point of the corner */
+}
+
+/* Vertical arm: drops down from the corner to the icons */
+.lineV {
     width: 2px;
-    height: 30vh;
-    min-height: 150px;
+    height: 20vh;
+    min-height: 80px;
     background-color: var(--text-secondary);
     margin-bottom: 1.5rem;
 }
 
+/* ── Icons column ── */
 .icons {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
+    padding-left: 8px;
+    /* slight indent so icons sit over the line centre */
 }
 
 .iconLink {
@@ -35,20 +63,11 @@
     transform: translateY(-2px);
 }
 
-@media (max-width: 1100px) {
-    .sidebar {
-        left: 10px;
-    }
-}
-
+/* ── Responsive ── */
 @media (max-width: 600px) {
-    .sidebar {
-        left: 5px;
-    }
-
-    .line {
-        height: 15vh;
-        min-height: 80px;
+    .lineV {
+        height: 10vh;
+        min-height: 50px;
     }
 
     .icons {

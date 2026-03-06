@@ -4,7 +4,11 @@ import styles from './SocialSidebar.module.css';
 export default function SocialSidebar() {
     return (
         <div className={styles.sidebar}>
-            <div className={styles.line}></div>
+            {/* L-shaped connector: horizontal arm → vertical arm → icons */}
+            <div className={styles.lConnector}>
+                <div className={styles.lineH}></div>
+                <div className={styles.lineV}></div>
+            </div>
             <div className={styles.icons}>
                 <a href="#" className={styles.iconLink} aria-label="Github: Add your link here">
                     <Github size={24} />
