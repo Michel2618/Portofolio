@@ -19,7 +19,7 @@ export default function ContactsSection() {
             <div className={styles.contactsContent}>
                 <div className={styles.contactsText}>
                     <p>
-                        I&apos;m interested in freelance opportunities. However, if you have other request or question, don&apos;t hesitate to contact me.
+                        I&apos;m actively looking for new opportunities in software engineering. Whether you want to collaborate on a digital platform, talk about smart home integrations, or discuss a freelance project, my inbox is always open.
                     </p>
                 </div>
 

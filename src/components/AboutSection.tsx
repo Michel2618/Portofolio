@@ -8,7 +8,6 @@ export default function AboutSection() {
             {/* Decorative elements */}
             <DotGrid className={styles.bgDots1} />
             <OutlineSquare size={105} color="secondary" className={styles.bgSquare1} />
-            <OverlapBoxes color="green" className={styles.bgOverlap1} />
             <OutlineSquare size={60} color="secondary" className={styles.bgSquare2} />
 
             <div className={styles.sectionHeader}>
@@ -20,15 +19,14 @@ export default function AboutSection() {
 
             <div className={styles.aboutContent}>
                 <div className={styles.aboutText}>
-                    <p>Hello, i&apos;m Elias!</p>
+                    <p>Hello, i&apos;m Michel!</p>
                     <br />
                     <p>
-                        I&apos;m a self-taught front-end developer based in Kyiv, Ukraine.
-                        I can develop responsive websites from scratch and raise them into modern user-friendly web experiences.
+                        I&apos;m a second-year Software Engineering student at IIT Sri Lanka, passionate about bridging the gap between digital design and physical technology.
                     </p>
                     <br />
                     <p>
-                        Transforming my creativity and knowledge into a websites has been my passion for over a year. I have been helping various clients to establish their presence online. I always strive to learn about the newest technologies and frameworks.
+                        When I&apos;m not writing code for modern web applications or leading group development projects, you can usually find me building DIY electronics and experimenting with smart home automations. I love exploring how software and hardware interact to solve real-world problems, and I am always eager to take on new technical challenges.
                     </p>
                     <Link href="#about" className={styles.readMoreBtn}>
                         Read more -&gt;
