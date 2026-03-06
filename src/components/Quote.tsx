@@ -6,11 +6,11 @@ export default function Quote() {
             <div className={styles.quoteBox}>
                 <div className={styles.quoteDecorTop}>"</div>
                 <blockquote className={styles.quoteText}>
-                    With great power comes great electricity bill
+                    We are not free in what we do, because we are not free in what we want.
                 </blockquote>
                 <div className={styles.quoteDecorBottom}>"</div>
                 <div className={styles.quoteAuthor}>
-                    - Dr. Who
+                    - Arthur Schopenhauer
                 </div>
             </div>
         </section>

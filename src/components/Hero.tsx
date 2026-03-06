@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './Hero.module.css';
 import { DotGrid, OutlineSquare, OverlapBoxes } from './DecorativeElements';
 
@@ -14,10 +15,10 @@ export default function Hero() {
 
             <div className={styles.heroContent}>
                 <h1 className={styles.title}>
-                    Elias is a <span className="heading-accent">web designer</span> and <span className="heading-accent">front-end developer</span>
+                    I am Michel Ruwishka, a <span className="heading-accent">software engineering</span> student and <span className="heading-accent">front-end developer</span>
                 </h1>
                 <p className={styles.subtitle}>
-                    He crafts responsive websites where technologies meet creativity
+                    From leading full-stack software projects to building custom smart home automations, I love turning complex problems into elegant, responsive solutions.
                 </p>
                 <Link href="#contacts" className={styles.ctaButton}>
                     Contact me!!
@@ -28,10 +29,20 @@ export default function Hero() {
                 <div className={styles.abstractGraphic}>
                     <div className={styles.shape1}></div>
                     <div className={styles.shape2}></div>
-                    {/* Decorative ascii or simple shapes to emulate the style */}
-                    <div className={styles.codeSnippet}>
-                        <code>{`const me = {\n  design: true,\n  code: true\n};`}</code>
+                    <div className={styles.profileImageWrapper}>
+                        <Image
+                            src="/profile_pic.png"
+                            alt="Michel Ruwishka"
+                            width={300}
+                            height={300}
+                            className={styles.profileImage}
+                            priority
+                        />
                     </div>
+                </div>
+                <div className={styles.codeSnippet}>
+                    <span className={styles.codeGreenDot}></span>
+                    <code>Currently working on <strong>Portfolio</strong></code>
                 </div>
             </div>
         </section>
