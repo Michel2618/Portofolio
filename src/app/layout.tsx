@@ -3,6 +3,7 @@ import { Inter, Fira_Code } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SocialSidebar from "@/components/SocialSidebar";
+import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
 
 const inter = Inter({
@@ -32,6 +33,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <ScrollToTop />
       </body>
     </html>
   );

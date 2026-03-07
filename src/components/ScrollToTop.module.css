@@ -1,0 +1,68 @@
+.btn {
+    /* layout */
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 999;
+
+    /* size & shape */
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+
+    /* colours */
+    background: rgba(40, 44, 51, 0.85);
+    color: #ffffff;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(255, 255, 255, 0.06);
+
+    /* flex centre the arrow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* hidden by default */
+    opacity: 0;
+    transform: translateY(16px) scale(0.85);
+    pointer-events: none;
+    transition: opacity 0.35s ease,
+        transform 0.35s ease,
+        box-shadow 0.25s ease;
+}
+
+.btn.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.btn:hover {
+    box-shadow: 0 6px 28px rgba(80, 250, 123, 0.25),
+        0 0 0 1px rgba(80, 250, 123, 0.35);
+    color: var(--accent-green);
+}
+
+/* The SVG ring sits absolutely over the button */
+.ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    transition: stroke-dashoffset 0.15s linear;
+}
+
+/* Arrow icon sits in the centre */
+.arrow {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.btn:hover .arrow {
+    transform: translateY(-2px);
+}
