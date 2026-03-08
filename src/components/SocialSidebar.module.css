@@ -64,7 +64,11 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
     .lineV {
         height: 10vh;
         min-height: 50px;

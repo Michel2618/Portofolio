@@ -18,8 +18,8 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: "Elias - Personal Blog",
-  description: "A dark-themed hacker-style personal portfolio",
+  title: "Michel Ruwishka - Personal Blog",
+  description: "Personal portfolio of Michel Ruwishka, a software engineering student and front-end developer",
 };
 
 export default function RootLayout({

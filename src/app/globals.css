@@ -50,6 +50,12 @@ a:hover {
   padding: 0 4rem;
 }
 
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
 .heading-accent {
   color: var(--accent-green);
 }
