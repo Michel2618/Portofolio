@@ -53,3 +53,13 @@ a:hover {
 .heading-accent {
   color: var(--accent-green);
 }
+
+/* Hide native cursor on mouse devices (custom cursor replaces it) */
+@media (pointer: fine) {
+
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
+}

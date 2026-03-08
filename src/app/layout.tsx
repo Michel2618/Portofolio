@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SocialSidebar from "@/components/SocialSidebar";
 import ScrollToTop from "@/components/ScrollToTop";
+import CustomCursor from "@/components/CustomCursor";
 import "./globals.css";
 
 const inter = Inter({
@@ -29,6 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${firaCode.variable}`}>
+        <CustomCursor />
         <SocialSidebar />
         <Navbar />
         {children}
