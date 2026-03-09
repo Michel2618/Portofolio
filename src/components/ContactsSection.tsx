@@ -1,7 +1,16 @@
 import styles from './ContactsSection.module.css';
 import { DotGrid, OutlineSquare, OverlapBoxes } from './DecorativeElements';
+import { getContacts } from '../lib/notion';
 
-export default function ContactsSection() {
+export default async function ContactsSection() {
+    const contactsData = await getContacts();
+
+    // Fallbacks to original content in case Notion is empty or fails
+    const sectionTitle = contactsData?.sectionTitle || 'contacts';
+    const mainText = contactsData?.mainText || "I'm actively looking for new opportunities in software engineering. Whether you want to collaborate on a digital platform, talk about smart home integrations, or discuss a freelance project, my inbox is always open.";
+    const email = contactsData?.email || 'michelruwishka@gmail.com';
+    const discord = contactsData?.discord || 'michel0468';
+
     return (
         <section className={`container ${styles.contactsSection}`} id="contacts">
             {/* Decorative elements */}
@@ -11,7 +20,7 @@ export default function ContactsSection() {
 
             <div className={styles.sectionHeader}>
                 <h2 className="font-mono text-2xl">
-                    <span className="heading-accent">#</span>contacts
+                    <span className="heading-accent">#</span>{sectionTitle.toLowerCase()}
                     <span className={styles.headerLine}></span>
                 </h2>
             </div>
@@ -19,18 +28,18 @@ export default function ContactsSection() {
             <div className={styles.contactsContent}>
                 <div className={styles.contactsText}>
                     <p>
-                        I&apos;m actively looking for new opportunities in software engineering. Whether you want to collaborate on a digital platform, talk about smart home integrations, or discuss a freelance project, my inbox is always open.
+                        {mainText}
                     </p>
                 </div>
 
                 <div className={styles.contactsBox}>
                     <h3 className={styles.boxTitle}>Message me here</h3>
                     <div className={styles.contactMethods}>
-                        <a href="mailto:elias@elias-dev.ml" className={styles.contactItem}>
-                            <span className={styles.icon}>@</span> michelruwishka@gmail.com
+                        <a href={`mailto:${email}`} className={styles.contactItem}>
+                            <span className={styles.icon}>@</span> {email}
                         </a>
                         <a href="#" className={styles.contactItem}>
-                            <span className={styles.icon}>#</span> michel0468
+                            <span className={styles.icon}>#</span> {discord}
                         </a>
                     </div>
                 </div>

@@ -1,32 +1,11 @@
 import Link from 'next/link';
 import styles from './ProjectsSection.module.css';
 import { DotGrid, OutlineSquare, OverlapBoxes } from './DecorativeElements';
+import { getActiveProjects } from '../lib/notion';
 
-const projects = [
-    {
-        id: 1,
-        title: 'ChertNodes',
-        tech: 'HTML SCSS Python Flask',
-        description: 'Minecraft servers hosting',
-        liveUrl: '#',
-    },
-    {
-        id: 2,
-        title: 'ProtectX',
-        tech: 'React Express Discord.js Node.js',
-        description: 'Discord anti-crash bot',
-        liveUrl: '#',
-    },
-    {
-        id: 3,
-        title: 'Kahoot Answers',
-        tech: 'CSS Express Node.js',
-        description: 'Get answers to your kahoot quiz',
-        liveUrl: '#',
-    }
-];
+export default async function ProjectsSection() {
+    const projects = await getActiveProjects();
 
-export default function ProjectsSection() {
     return (
         <section className={`container ${styles.projectsSection}`} id="works">
             {/* Decorative elements */}
@@ -47,23 +26,32 @@ export default function ProjectsSection() {
             </div>
 
             <div className={styles.projectsGrid}>
-                {projects.map(project => (
-                    <div key={project.id} className={styles.projectCard}>
-                        <div className={styles.projectImage}>
-                            {/* Placeholder for project image */}
-                        </div>
-                        <div className={styles.projectTech}>
-                            {project.tech}
-                        </div>
-                        <div className={styles.projectInfo}>
-                            <h3 className={styles.projectTitle}>{project.title}</h3>
-                            <p className={styles.projectDesc}>{project.description}</p>
-                            <div className={styles.projectLinks}>
-                                <a href={project.liveUrl} className={styles.primaryBtn}>Live &lt;~&gt;</a>
+                {projects.length > 0 ? (
+                    projects.map(project => (
+                        <div key={project.id} className={styles.projectCard}>
+                            <div className={styles.projectImage}>
+                                {/* Placeholder for project image */}
+                            </div>
+                            <div className={styles.projectTech}>
+                                {project.tech}
+                            </div>
+                            <div className={styles.projectInfo}>
+                                <h3 className={styles.projectTitle}>{project.title}</h3>
+                                <p className={styles.projectDesc}>{project.description}</p>
+                                <div className={styles.projectLinks}>
+                                    {project.liveUrl && (
+                                        <a href={project.liveUrl} target="_blank" rel="noreferrer" className={styles.primaryBtn}>Live &lt;~&gt;</a>
+                                    )}
+                                    {project.githubUrl && (
+                                        <a href={project.githubUrl} target="_blank" rel="noreferrer" className={styles.primaryBtn}>GitHub &gt;=</a>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))
+                ) : (
+                    <p>No projects found. Check back later!</p>
+                )}
             </div>
         </section>
     );
