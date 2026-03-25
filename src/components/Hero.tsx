@@ -15,7 +15,7 @@ export default function Hero() {
 
             <div className={styles.heroContent}>
                 <h1 className={styles.title}>
-                    I am Michel Ruwishka, a <span className="heading-accent">software engineering</span> student and <span className="heading-accent">front-end developer</span>
+                    I am Michel Ruwishka, a <span className="heading-accent">software engineering</span> student and <span className="heading-accent">full-Stack developer</span>
                 </h1>
                 <p className={styles.subtitle}>
                     From leading full-stack software projects to building custom smart home automations, I love turning complex problems into elegant, responsive solutions.
