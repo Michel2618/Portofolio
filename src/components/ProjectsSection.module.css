@@ -82,10 +82,16 @@
 }
 
 .projectCard {
-    border: 1px solid var(--text-secondary);
     display: flex;
     flex-direction: column;
-    transition: transform 0.2s, box-shadow 0.2s;
+    background: rgba(255, 255, 255, 0.05); /* Slightly more milky white */
+    backdrop-filter: blur(40px); /* Dramatically increased blur for heavy frost */
+    -webkit-backdrop-filter: blur(40px); /* For Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Sleek border remains */
+    border-radius: 16px; /* Smooth rounded corners remain */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow remains */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transition for projects */
+    overflow: hidden;
 }
 
 .projectCard:hover {
