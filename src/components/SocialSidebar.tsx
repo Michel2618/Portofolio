@@ -10,7 +10,7 @@ export default function SocialSidebar() {
                 <div className={styles.lineV}></div>
             </div>
             <div className={styles.icons}>
-                <a href="#" className={styles.iconLink} aria-label="Github: Add your link here">
+                <a href="#" className={styles.iconLink} aria-label="Github: https://github.com/Michel2618">
                     <Github size={24} />
                 </a>
                 <a href="#" className={styles.iconLink} aria-label="Dribbble: Add your link here">
@@ -19,13 +19,13 @@ export default function SocialSidebar() {
                 <a href="#" className={styles.iconLink} aria-label="Figma: Add your link here">
                     <Figma size={24} />
                 </a>
-                <a href="#" className={styles.iconLink} aria-label="LinkedIn: Add your link here">
+                <a href="#" className={styles.iconLink} aria-label="LinkedIn: https://www.linkedin.com/in/michel-ruwishka/">
                     <Linkedin size={24} />
                 </a>
-                <a href="#" className={styles.iconLink} aria-label="Instagram: Add your link here">
+                <a href="#" className={styles.iconLink} aria-label="Instagram: https://www.instagram.com/mr_ruwishka?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
                     <Instagram size={24} />
                 </a>
-                <a href="#" className={styles.iconLink} aria-label="Facebook: Add your link here">
+                <a href="#" className={styles.iconLink} aria-label="Facebook: https://www.facebook.com/share/1CHxczWhCt/?mibextid=wwXIfr">
                     <Facebook size={24} />
                 </a>
                 <a href="#" className={styles.iconLink} aria-label="Youtube: Add your link here">
