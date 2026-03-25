@@ -66,11 +66,16 @@
 }
 
 .contactsBox {
-    border: 1px solid var(--text-secondary);
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    background: rgba(255, 255, 255, 0.05); /* Slightly more milky white */
+    backdrop-filter: blur(40px); /* Dramatically increased blur for heavy frost */
+    -webkit-backdrop-filter: blur(40px); /* For Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Sleek border remains */
+    border-radius: 16px; /* Smooth rounded corners remain */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow remains */
 }
 
 .boxTitle {
