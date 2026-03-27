@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import styles from './dashboard.module.css';
 import { db, auth } from '@/lib/firebase';
 import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 
 type TabView = 'projects' | 'quotes' | 'contact';
 
@@ -53,9 +53,13 @@ export default function AdminDashboard() {
   });
 
   // Handlers
-  const handleSignOut = () => {
-    // TODO: Implement Firebase Sign Out
-    console.log("Sign out triggered");
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      router.push('/admin');
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
   };
 
   const handleProjectSubmit = async (e: React.FormEvent) => {
