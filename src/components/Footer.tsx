@@ -29,7 +29,7 @@ export default async function Footer() {
                             <span className={styles.name}>Michel</span>
                             <span className={styles.email}>michelruwishka@gmail.com</span>
                         </div>
-                        <p className={styles.title}>Web designer and front-end developer</p>
+                        <p className={styles.title}>Web designer and full-stack developer</p>
                         {cvUrl && (
                             <div className={styles.cvLinkWrapper}>
                                 <a href={cvUrl} target="_blank" rel="noopener noreferrer" className={styles.cvLink}>
