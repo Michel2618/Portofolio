@@ -17,12 +17,17 @@ export default function AdminLoginPage() {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  const AUTHORIZED_EMAIL = 'michelruwishka@gmail.com';
-
   const handleAuthSuccess = async (userEmail: string | null) => {
-    if (userEmail !== AUTHORIZED_EMAIL) {
+    const allowedEmails = [
+      'michelruwishka@gmail.com',
+      'w2120009@westminster.ac.uk',
+      'ruwishkam@gmail.com',
+      'michel.20232043@iit.ac.lk'
+    ];
+
+    if (!userEmail || !allowedEmails.includes(userEmail)) {
       await signOut(auth);
-      setError('Unauthorized Access');
+      setError('Unauthorized: Email not whitelisted.');
       return;
     }
     router.push('/admin/dashboard');

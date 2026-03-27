@@ -11,25 +11,12 @@ type TabView = 'projects' | 'quotes' | 'contact';
 
 export default function AdminDashboard() {
   const router = useRouter();
+
+  // 1. ALL HOOKS MUST BE DECLARED AT THE TOP
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-
   const [activeTab, setActiveTab] = useState<TabView>('projects');
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (!user || user.email !== 'michelruwishka@gmail.com') {
-        router.push('/admin');
-      } else {
-        setIsAuthorized(true);
-      }
-      setIsLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, [router]);
-
-  // Forms local state
   const [projectForm, setProjectForm] = useState({
     title: '',
     techStack: '',
@@ -52,7 +39,28 @@ export default function AdminDashboard() {
     cvFile: null as File | null
   });
 
-  // Handlers
+  // 2. Security Check Effect
+  useEffect(() => {
+    const allowedEmails = [
+      'michelruwishka@gmail.com',
+      'w2120009@westminster.ac.uk',
+      'ruwishkam@gmail.com',
+      'michel.20232043@iit.ac.lk'
+    ];
+
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user || !user.email || !allowedEmails.includes(user.email)) {
+        router.push('/admin');
+      } else {
+        setIsAuthorized(true);
+      }
+      setIsLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, [router]);
+
+  // 3. Handlers
   const handleSignOut = async () => {
     try {
       await signOut(auth);
@@ -162,9 +170,11 @@ export default function AdminDashboard() {
     }
   };
 
+  // 4. EARLY RETURNS MUST GO HERE (After all hooks)
   if (isLoading) return <div className={styles.loading} style={{ padding: '2rem', textAlign: 'center', color: '#fff' }}>Verifying access...</div>;
   if (!isAuthorized) return null;
 
+  // 5. MAIN RENDER
   return (
     <div className={styles.container}>
       {/* Header */}
@@ -179,19 +189,19 @@ export default function AdminDashboard() {
       <main className={styles.main}>
         {/* Tab Navigation */}
         <div className={styles.tabs}>
-          <button 
+          <button
             className={`${styles.tabBtn} ${activeTab === 'projects' ? styles.activeTab : ''}`}
             onClick={() => setActiveTab('projects')}
           >
             Projects
           </button>
-          <button 
+          <button
             className={`${styles.tabBtn} ${activeTab === 'quotes' ? styles.activeTab : ''}`}
             onClick={() => setActiveTab('quotes')}
           >
             Quotes
           </button>
-          <button 
+          <button
             className={`${styles.tabBtn} ${activeTab === 'contact' ? styles.activeTab : ''}`}
             onClick={() => setActiveTab('contact')}
           >
@@ -200,52 +210,52 @@ export default function AdminDashboard() {
         </div>
 
         {/* Tab Content Panels */}
-        
+
         {/* Projects Tab */}
         {activeTab === 'projects' && (
           <form className={styles.formCard} onSubmit={handleProjectSubmit}>
             <div className={styles.formGroup}>
               <label htmlFor="title">Title</label>
-              <input 
-                type="text" 
-                id="title" 
+              <input
+                type="text"
+                id="title"
                 className={styles.input}
                 value={projectForm.title}
                 onChange={(e) => setProjectForm({ ...projectForm, title: e.target.value })}
-                required 
+                required
               />
             </div>
-            
+
             <div className={styles.formGroup}>
               <label htmlFor="techStack">Tech Stack</label>
-              <input 
-                type="text" 
-                id="techStack" 
+              <input
+                type="text"
+                id="techStack"
                 className={styles.input}
                 value={projectForm.techStack}
                 onChange={(e) => setProjectForm({ ...projectForm, techStack: e.target.value })}
                 placeholder="e.g. Next.js, TypeScript, Firebase"
-                required 
+                required
               />
             </div>
 
             <div className={styles.formGroup}>
               <label htmlFor="description">Project Description</label>
-              <textarea 
-                id="description" 
+              <textarea
+                id="description"
                 className={styles.textarea}
                 value={projectForm.description}
                 onChange={(e) => setProjectForm({ ...projectForm, description: e.target.value })}
                 placeholder="Enter project overview..."
-                required 
+                required
               />
             </div>
 
             <div className={styles.formGroup}>
               <label htmlFor="liveLink">Live Link (URL)</label>
-              <input 
-                type="url" 
-                id="liveLink" 
+              <input
+                type="url"
+                id="liveLink"
                 className={styles.input}
                 value={projectForm.liveLink}
                 onChange={(e) => setProjectForm({ ...projectForm, liveLink: e.target.value })}
@@ -254,9 +264,9 @@ export default function AdminDashboard() {
 
             <div className={styles.formGroup}>
               <label htmlFor="githubLink">GitHub Link (URL)</label>
-              <input 
-                type="url" 
-                id="githubLink" 
+              <input
+                type="url"
+                id="githubLink"
                 className={styles.input}
                 value={projectForm.githubLink}
                 onChange={(e) => setProjectForm({ ...projectForm, githubLink: e.target.value })}
@@ -264,9 +274,9 @@ export default function AdminDashboard() {
             </div>
 
             <div className={styles.checkboxGroup}>
-              <input 
-                type="checkbox" 
-                id="isFeatured" 
+              <input
+                type="checkbox"
+                id="isFeatured"
                 className={styles.checkbox}
                 checked={projectForm.isFeatured}
                 onChange={(e) => setProjectForm({ ...projectForm, isFeatured: e.target.checked })}
@@ -276,9 +286,9 @@ export default function AdminDashboard() {
 
             <div className={styles.formGroup}>
               <label htmlFor="coverImage">Cover Image</label>
-              <input 
-                type="file" 
-                id="coverImage" 
+              <input
+                type="file"
+                id="coverImage"
                 accept="image/*"
                 className={styles.fileInput}
                 onChange={(e) => {
@@ -299,24 +309,24 @@ export default function AdminDashboard() {
           <form className={styles.formCard} onSubmit={handleQuoteSubmit}>
             <div className={styles.formGroup}>
               <label htmlFor="quoteText">Quote Text</label>
-              <textarea 
-                id="quoteText" 
+              <textarea
+                id="quoteText"
                 className={styles.textarea}
                 value={quoteForm.quoteText}
                 onChange={(e) => setQuoteForm({ ...quoteForm, quoteText: e.target.value })}
-                required 
+                required
               />
             </div>
-            
+
             <div className={styles.formGroup}>
               <label htmlFor="author">Author</label>
-              <input 
-                type="text" 
-                id="author" 
+              <input
+                type="text"
+                id="author"
                 className={styles.input}
                 value={quoteForm.author}
                 onChange={(e) => setQuoteForm({ ...quoteForm, author: e.target.value })}
-                required 
+                required
               />
             </div>
 
@@ -331,32 +341,32 @@ export default function AdminDashboard() {
           <form className={styles.formCard} onSubmit={handleContactSubmit}>
             <div className={styles.formGroup}>
               <label htmlFor="mainDescription">Main Description</label>
-              <textarea 
-                id="mainDescription" 
+              <textarea
+                id="mainDescription"
                 className={styles.textarea}
                 value={contactForm.mainDescription}
                 onChange={(e) => setContactForm({ ...contactForm, mainDescription: e.target.value })}
-                required 
+                required
               />
             </div>
-            
+
             <div className={styles.formGroup}>
               <label htmlFor="email">Email</label>
-              <input 
-                type="email" 
-                id="email" 
+              <input
+                type="email"
+                id="email"
                 className={styles.input}
                 value={contactForm.email}
                 onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                required 
+                required
               />
             </div>
 
             <div className={styles.formGroup}>
               <label htmlFor="discordUsername">Discord Username</label>
-              <input 
-                type="text" 
-                id="discordUsername" 
+              <input
+                type="text"
+                id="discordUsername"
                 className={styles.input}
                 value={contactForm.discordUsername}
                 onChange={(e) => setContactForm({ ...contactForm, discordUsername: e.target.value })}
@@ -365,9 +375,9 @@ export default function AdminDashboard() {
 
             <div className={styles.formGroup}>
               <label htmlFor="cvFile">Upload CV (PDF)</label>
-              <input 
-                type="file" 
-                id="cvFile" 
+              <input
+                type="file"
+                id="cvFile"
                 accept="application/pdf"
                 className={styles.fileInput}
                 onChange={(e) => {
