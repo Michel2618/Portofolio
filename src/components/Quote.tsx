@@ -1,11 +1,20 @@
 import styles from './Quote.module.css';
-import { getQuote } from '../lib/notion';
+import { db } from '../lib/firebase';
+import { collection, getDocs } from 'firebase/firestore';
 
 export default async function Quote() {
-    const quoteData = await getQuote();
+    let quoteData: any = null;
+    try {
+        const querySnapshot = await getDocs(collection(db, 'quotes'));
+        if (!querySnapshot.empty) {
+            quoteData = querySnapshot.docs[0].data();
+        }
+    } catch (error) {
+        console.error("Error fetching quote from Firebase:", error);
+    }
 
     // Fallback to the original quote if not found
-    const text = quoteData?.text || 'We are not free in what we do, because we are not free in what we want.';
+    const text = quoteData?.quoteText || 'We are not free in what we do, because we are not free in what we want.';
     const author = quoteData?.author || 'Arthur Schopenhauer';
 
     return (

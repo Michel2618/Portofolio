@@ -1,9 +1,22 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Github, Figma, Linkedin, MessageSquare } from 'lucide-react';
+import { Github, Figma, MessageSquare } from 'lucide-react';
 import styles from './Footer.module.css';
+import { db } from '../lib/firebase';
+import { doc, getDoc } from 'firebase/firestore';
 
-export default function Footer() {
+export default async function Footer() {
+    let cvUrl: string | null = null;
+    try {
+        const docRef = doc(db, 'contact', 'main');
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            cvUrl = docSnap.data()?.cvUrl ?? null;
+        }
+    } catch (error) {
+        console.error('Error fetching CV URL from Firebase:', error);
+    }
+
     return (
         <footer className={styles.footer}>
             <div className={`container ${styles.footerContainer}`}>
@@ -17,6 +30,13 @@ export default function Footer() {
                             <span className={styles.email}>michelruwishka@gmail.com</span>
                         </div>
                         <p className={styles.title}>Web designer and front-end developer</p>
+                        {cvUrl && (
+                            <div className={styles.cvLinkWrapper}>
+                                <a href={cvUrl} target="_blank" rel="noopener noreferrer" className={styles.cvLink}>
+                                    Download the CV
+                                </a>
+                            </div>
+                        )}
                     </div>
 
                     <div className={styles.footerMedia}>

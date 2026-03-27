@@ -1,0 +1,298 @@
+/* ============================================================
+   Admin Login – Full-screen page
+   ============================================================ */
+.page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a1d24;
+  overflow: hidden;
+  padding: 2rem;
+  /* reset root body padding-top that comes from global layout */
+  margin-top: calc(-1 * var(--navbar-height, 0px));
+}
+
+/* ── Animated background blobs ── */
+.blob1,
+.blob2 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.blob1 {
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, #c778dd 0%, transparent 70%);
+  top: -120px;
+  left: -120px;
+  animation: drift1 12s ease-in-out infinite alternate;
+}
+
+.blob2 {
+  width: 460px;
+  height: 460px;
+  background: radial-gradient(circle, #50fa7b 0%, transparent 70%);
+  bottom: -100px;
+  right: -100px;
+  animation: drift2 15s ease-in-out infinite alternate;
+}
+
+@keyframes drift1 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(60px, 40px) scale(1.1); }
+}
+
+@keyframes drift2 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-50px, -30px) scale(1.08); }
+}
+
+/* ── Glass card ── */
+.card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  padding: 2.8rem 2.4rem;
+
+  /* Frosted liquid glass effect */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1),
+              inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  animation: slideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Lock icon ── */
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 1.4rem;
+  background: rgba(199, 120, 221, 0.12);
+  border: 1px solid rgba(199, 120, 221, 0.35);
+  border-radius: 12px;
+}
+
+.lockIcon {
+  width: 26px;
+  height: 26px;
+  color: #c778dd;
+}
+
+/* ── Heading ── */
+.heading {
+  font-family: var(--font-fira-code, monospace);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.01em;
+}
+
+.accent {
+  color: #50fa7b;
+}
+
+.sub {
+  font-size: 0.82rem;
+  color: #abb2bf;
+  text-align: center;
+  margin-bottom: 2rem;
+  letter-spacing: 0.02em;
+}
+
+/* ── Form ── */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.label {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #abb2bf;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.inputWrap {
+  position: relative;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: #abb2bf;
+  pointer-events: none;
+  transition: color 0.2s ease;
+}
+
+.input {
+  width: 100%;
+  padding: 0.7rem 0.9rem 0.7rem 2.6rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.92rem;
+  font-family: var(--font-inter, sans-serif);
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input::placeholder {
+  color: rgba(171, 178, 191, 0.5);
+}
+
+.input:focus {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(199, 120, 221, 0.6);
+  box-shadow: 0 0 0 3px rgba(199, 120, 221, 0.1);
+}
+
+.input:focus + .inputIcon,
+.inputWrap:focus-within .inputIcon {
+  color: #c778dd;
+}
+
+/* ── Login button ── */
+.loginBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.75rem 1.2rem;
+  background: linear-gradient(135deg, #c778dd, #9f4dbd);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: var(--font-inter, sans-serif);
+  letter-spacing: 0.02em;
+  cursor: none; /* matches site's custom cursor */
+  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+  box-shadow: 0 4px 20px rgba(199, 120, 221, 0.35);
+}
+
+.loginBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(199, 120, 221, 0.5);
+  opacity: 0.95;
+}
+
+.loginBtn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 14px rgba(199, 120, 221, 0.3);
+}
+
+.btnArrow {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+}
+
+.loginBtn:hover .btnArrow {
+  transform: translateX(3px);
+}
+
+/* ── Divider ── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.4rem 0 1rem;
+}
+
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dividerText {
+  font-size: 0.75rem;
+  color: #abb2bf;
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+}
+
+/* ── Google button ── */
+.googleBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  width: 100%;
+  padding: 0.7rem 1.2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: #e0e0e0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: var(--font-inter, sans-serif);
+  letter-spacing: 0.01em;
+  cursor: none;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.18s ease,
+              box-shadow 0.18s ease;
+}
+
+.googleBtn:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.googleBtn:active {
+  transform: translateY(0);
+}
+
+.googleLogo {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .card {
+    padding: 2rem 1.5rem;
+  }
+
+  .heading {
+    font-size: 1.25rem;
+  }
+}

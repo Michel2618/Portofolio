@@ -1,15 +1,26 @@
 import styles from './ContactsSection.module.css';
 import { DotGrid, OutlineSquare, OverlapBoxes } from './DecorativeElements';
-import { getContacts } from '../lib/notion';
+import { db } from '../lib/firebase';
+import { doc, getDoc } from 'firebase/firestore';
+import CVButton from './CVButton';
 
 export default async function ContactsSection() {
-    const contactsData = await getContacts();
+    let contactsData: any = null;
+    try {
+        const docRef = doc(db, 'contact', 'main');
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            contactsData = docSnap.data();
+        }
+    } catch (error) {
+        console.error("Error fetching contact info from Firebase:", error);
+    }
 
-    // Fallbacks to original content in case Notion is empty or fails
+    // Fallbacks to original content in case Firebase is empty or fails
     const sectionTitle = contactsData?.sectionTitle || 'contacts';
-    const mainText = contactsData?.mainText || "I'm actively looking for new opportunities in software engineering. Whether you want to collaborate on a digital platform, talk about smart home integrations, or discuss a freelance project, my inbox is always open.";
+    const mainText = contactsData?.mainDescription || "I'm actively looking for new opportunities in software engineering. Whether you want to collaborate on a digital platform, talk about smart home integrations, or discuss a freelance project, my inbox is always open.";
     const email = contactsData?.email || 'michelruwishka@gmail.com';
-    const discord = contactsData?.discord || 'michel0468';
+    const discord = contactsData?.discordUsername || 'michel0468';
 
     return (
         <section className={`container ${styles.contactsSection}`} id="contacts">
@@ -30,6 +41,9 @@ export default async function ContactsSection() {
                     <p>
                         {mainText}
                     </p>
+                    <div className={styles.cvButtonWrapper}>
+                        <CVButton />
+                    </div>
                 </div>
 
                 <div className={styles.contactsBox}>
@@ -41,6 +55,7 @@ export default async function ContactsSection() {
                         <a href="#" className={styles.contactItem}>
                             <span className={styles.icon}>#</span> {discord}
                         </a>
+
                     </div>
                 </div>
             </div>

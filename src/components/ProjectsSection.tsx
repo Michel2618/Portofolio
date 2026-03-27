@@ -1,10 +1,25 @@
 import Link from 'next/link';
 import styles from './ProjectsSection.module.css';
 import { DotGrid, OutlineSquare, OverlapBoxes } from './DecorativeElements';
-import { getActiveProjects } from '../lib/notion';
+import { db } from '@/lib/firebase';
+import { collection, getDocs } from 'firebase/firestore';
+import ProjectCardWrapper from './ProjectCardWrapper';
 
 export default async function ProjectsSection() {
-    const projects = await getActiveProjects();
+    const projectsSnapshot = await getDocs(collection(db, 'projects'));
+    const projects = projectsSnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+    })) as Array<{
+        id: string;
+        title: string;
+        description: string;
+        techStack: string;
+        liveLink: string;
+        githubLink: string;
+        isFeatured: boolean;
+        imageUrl: string;
+    }>;
 
     return (
         <section className={`container ${styles.projectsSection}`} id="works">
@@ -28,26 +43,39 @@ export default async function ProjectsSection() {
             <div className={styles.projectsGrid}>
                 {projects.length > 0 ? (
                     projects.map(project => (
-                        <div key={project.id} className={styles.projectCard}>
-                            <div className={styles.projectImage}>
-                                {/* Placeholder for project image */}
-                            </div>
-                            <div className={styles.projectTech}>
-                                {project.tech}
-                            </div>
-                            <div className={styles.projectInfo}>
-                                <h3 className={styles.projectTitle}>{project.title}</h3>
-                                <p className={styles.projectDesc}>{project.description}</p>
-                                <div className={styles.projectLinks}>
-                                    {project.liveUrl && (
-                                        <a href={project.liveUrl} target="_blank" rel="noreferrer" className={styles.primaryBtn}>Live &lt;~&gt;</a>
-                                    )}
-                                    {project.githubUrl && (
-                                        <a href={project.githubUrl} target="_blank" rel="noreferrer" className={styles.primaryBtn}>GitHub &gt;=</a>
+                        <ProjectCardWrapper 
+                            key={project.id} 
+                            projectId={project.id}
+                            className={styles.projectCard}
+                        >
+                                <div className={styles.projectImage}>
+                                    {project.imageUrl ? (
+                                        <img 
+                                            src={project.imageUrl} 
+                                            alt={project.title} 
+                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                                        />
+                                    ) : (
+                                        /* Placeholder for project image */
+                                        <div style={{ width: '100%', height: '100%', backgroundColor: '#2b2b2b' }} />
                                     )}
                                 </div>
-                            </div>
-                        </div>
+                                <div className={styles.projectTech}>
+                                    {project.techStack}
+                                </div>
+                                <div className={styles.projectInfo}>
+                                    <h3 className={styles.projectTitle}>{project.title}</h3>
+                                    <p className={styles.projectDesc}>{project.description}</p>
+                                    <div className={styles.projectLinks}>
+                                        {project.liveLink && (
+                                            <a href={project.liveLink} target="_blank" rel="noreferrer" className={styles.primaryBtn}>Live &lt;~&gt;</a>
+                                        )}
+                                        {project.githubLink && (
+                                            <a href={project.githubLink} target="_blank" rel="noreferrer" className={styles.primaryBtn}>GitHub &gt;=</a>
+                                        )}
+                                    </div>
+                                </div>
+                        </ProjectCardWrapper>
                     ))
                 ) : (
                     <p>No projects found. Check back later!</p>

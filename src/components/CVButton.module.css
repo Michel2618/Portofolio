@@ -1,0 +1,32 @@
+.cvButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px;
+    background-color: #50fa7b;
+    color: #1a1a2e;
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
+    box-shadow: 0 4px 18px rgba(80, 250, 123, 0.25);
+    white-space: nowrap;
+}
+
+.cvButton:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+    box-shadow: 0 6px 28px rgba(80, 250, 123, 0.4);
+}
+
+.cvButton:active {
+    transform: scale(0.98);
+    filter: brightness(0.95);
+}
+
+.icon {
+    font-size: 1.15rem;
+    line-height: 1;
+}
