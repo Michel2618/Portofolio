@@ -1,14 +1,33 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './dashboard.module.css';
-import { db } from '@/lib/firebase';
+import { db, auth } from '@/lib/firebase';
 import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
 
 type TabView = 'projects' | 'quotes' | 'contact';
 
 export default function AdminDashboard() {
+  const router = useRouter();
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
   const [activeTab, setActiveTab] = useState<TabView>('projects');
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user || user.email !== 'michelruwishka@gmail.com') {
+        router.push('/admin');
+      } else {
+        setIsAuthorized(true);
+      }
+      setIsLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, [router]);
 
   // Forms local state
   const [projectForm, setProjectForm] = useState({
@@ -138,6 +157,9 @@ export default function AdminDashboard() {
       alert('Error saving contact info.');
     }
   };
+
+  if (isLoading) return <div className={styles.loading} style={{ padding: '2rem', textAlign: 'center', color: '#fff' }}>Verifying access...</div>;
+  if (!isAuthorized) return null;
 
   return (
     <div className={styles.container}>
