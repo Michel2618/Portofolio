@@ -4,10 +4,10 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './dashboard.module.css';
 import { db, auth } from '@/lib/firebase';
-import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, setDoc, getDocs, updateDoc, getDoc } from 'firebase/firestore';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 
-type TabView = 'projects' | 'quotes' | 'contact';
+type TabView = 'projects' | 'quotes' | 'contact' | 'skills';
 
 export default function AdminDashboard() {
   const router = useRouter();
@@ -16,6 +16,8 @@ export default function AdminDashboard() {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<TabView>('projects');
+  const [projectsList, setProjectsList] = useState<any[]>([]);
+  const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
 
   const [projectForm, setProjectForm] = useState({
     title: '',
@@ -39,6 +41,36 @@ export default function AdminDashboard() {
     cvFile: null as File | null
   });
 
+  const [skillsForm, setSkillsForm] = useState({
+    languages: '',
+    databases: '',
+    tools: '',
+    frameworks: '',
+    other: ''
+  });
+
+  useEffect(() => {
+    const fetchSkills = async () => {
+      try {
+        const docRef = doc(db, 'skills', 'main');
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setSkillsForm({
+            languages: data.languages || '',
+            databases: data.databases || '',
+            tools: data.tools || '',
+            frameworks: data.frameworks || '',
+            other: data.other || ''
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching skills:', error);
+      }
+    };
+    fetchSkills();
+  }, []);
+
   // 2. Security Check Effect
   useEffect(() => {
     const allowedEmails = [
@@ -59,6 +91,23 @@ export default function AdminDashboard() {
 
     return () => unsubscribe();
   }, [router]);
+
+  const fetchProjects = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'projects'));
+      const projects = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setProjectsList(projects);
+    } catch (error) {
+      console.error('Error fetching projects:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
 
   // 3. Handlers
   const handleSignOut = async () => {
@@ -87,15 +136,30 @@ export default function AdminDashboard() {
         imageUrl = data.secure_url;
       }
 
-      await addDoc(collection(db, 'projects'), {
-        title: projectForm.title,
-        techStack: projectForm.techStack,
-        description: projectForm.description,
-        liveLink: projectForm.liveLink,
-        githubLink: projectForm.githubLink,
-        isFeatured: projectForm.isFeatured,
-        imageUrl: imageUrl,
-      });
+      if (editingProjectId) {
+        const updateData: any = {
+          title: projectForm.title,
+          techStack: projectForm.techStack,
+          description: projectForm.description,
+          liveLink: projectForm.liveLink,
+          githubLink: projectForm.githubLink,
+          isFeatured: projectForm.isFeatured,
+        };
+        if (imageUrl) {
+          updateData.imageUrl = imageUrl;
+        }
+        await updateDoc(doc(db, 'projects', editingProjectId), updateData);
+      } else {
+        await addDoc(collection(db, 'projects'), {
+          title: projectForm.title,
+          techStack: projectForm.techStack,
+          description: projectForm.description,
+          liveLink: projectForm.liveLink,
+          githubLink: projectForm.githubLink,
+          isFeatured: projectForm.isFeatured,
+          imageUrl: imageUrl,
+        });
+      }
 
       setProjectForm({
         title: '',
@@ -106,7 +170,9 @@ export default function AdminDashboard() {
         isFeatured: false,
         coverImage: null
       });
+      setEditingProjectId(null);
       (e.target as HTMLFormElement).reset();
+      await fetchProjects();
       alert('Saved successfully!');
     } catch (error) {
       console.error('Error saving project:', error);
@@ -170,6 +236,17 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleSkillsSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await setDoc(doc(db, 'skills', 'main'), skillsForm);
+      alert('Saved successfully!');
+    } catch (error) {
+      console.error('Error saving skills:', error);
+      alert('Error saving skills.');
+    }
+  };
+
   // 4. EARLY RETURNS MUST GO HERE (After all hooks)
   if (isLoading) return <div className={styles.loading} style={{ padding: '2rem', textAlign: 'center', color: '#fff' }}>Verifying access...</div>;
   if (!isAuthorized) return null;
@@ -207,13 +284,20 @@ export default function AdminDashboard() {
           >
             Contact Info
           </button>
+          <button
+            className={`${styles.tabBtn} ${activeTab === 'skills' ? styles.activeTab : ''}`}
+            onClick={() => setActiveTab('skills')}
+          >
+            Skills
+          </button>
         </div>
 
         {/* Tab Content Panels */}
 
         {/* Projects Tab */}
         {activeTab === 'projects' && (
-          <form className={styles.formCard} onSubmit={handleProjectSubmit}>
+          <div>
+            <form className={styles.formCard} onSubmit={handleProjectSubmit}>
             <div className={styles.formGroup}>
               <label htmlFor="title">Title</label>
               <input
@@ -299,9 +383,42 @@ export default function AdminDashboard() {
             </div>
 
             <button type="submit" className={styles.submitBtn}>
-              Save Project
+              {editingProjectId ? 'Update Project' : 'Save Project'}
             </button>
           </form>
+
+          <div style={{ marginTop: '2rem' }}>
+            <h2 style={{ color: '#fff', marginBottom: '1rem', fontSize: '1.5rem', fontWeight: 'bold' }}>Edit Existing Projects</h2>
+            <ul style={{ listStyle: 'none', padding: 0 }}>
+              {projectsList.map((proj) => (
+                <li key={proj.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255, 255, 255, 0.05)', padding: '1rem', marginBottom: '0.5rem', borderRadius: '8px', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
+                  <span style={{ color: '#fff', fontWeight: '500' }}>{proj.title}</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setProjectForm({
+                        title: proj.title || '',
+                        techStack: proj.techStack || '',
+                        description: proj.description || '',
+                        liveLink: proj.liveLink || '',
+                        githubLink: proj.githubLink || '',
+                        isFeatured: proj.isFeatured || false,
+                        coverImage: null
+                      });
+                      setEditingProjectId(proj.id);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    style={{ padding: '0.5rem 1rem', background: 'rgba(255, 255, 255, 0.1)', color: '#fff', border: '1px solid rgba(255, 255, 255, 0.2)', borderRadius: '4px', cursor: 'pointer', transition: 'background 0.2s' }}
+                    onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)'}
+                    onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'}
+                  >
+                    Edit
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+          </div>
         )}
 
         {/* Quotes Tab */}
@@ -389,6 +506,75 @@ export default function AdminDashboard() {
 
             <button type="submit" className={styles.submitBtn}>
               Save Contact Info
+            </button>
+          </form>
+        )}
+
+        {/* Skills Tab */}
+        {activeTab === 'skills' && (
+          <form className={styles.formCard} onSubmit={handleSkillsSubmit}>
+            <div className={styles.formGroup}>
+              <label htmlFor="languages">Languages</label>
+              <input
+                type="text"
+                id="languages"
+                className={styles.input}
+                value={skillsForm.languages}
+                onChange={(e) => setSkillsForm({ ...skillsForm, languages: e.target.value })}
+                placeholder="e.g. JavaScript, TypeScript, Python"
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="databases">Databases</label>
+              <input
+                type="text"
+                id="databases"
+                className={styles.input}
+                value={skillsForm.databases}
+                onChange={(e) => setSkillsForm({ ...skillsForm, databases: e.target.value })}
+                placeholder="e.g. MongoDB, PostgreSQL"
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="tools">Tools</label>
+              <input
+                type="text"
+                id="tools"
+                className={styles.input}
+                value={skillsForm.tools}
+                onChange={(e) => setSkillsForm({ ...skillsForm, tools: e.target.value })}
+                placeholder="e.g. Git, Docker"
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="frameworks">Frameworks & Libraries</label>
+              <input
+                type="text"
+                id="frameworks"
+                className={styles.input}
+                value={skillsForm.frameworks}
+                onChange={(e) => setSkillsForm({ ...skillsForm, frameworks: e.target.value })}
+                placeholder="e.g. React, Next.js, Vue"
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="other">Other</label>
+              <input
+                type="text"
+                id="other"
+                className={styles.input}
+                value={skillsForm.other}
+                onChange={(e) => setSkillsForm({ ...skillsForm, other: e.target.value })}
+                placeholder="e.g. REST APIs, Agile"
+              />
+            </div>
+
+            <button type="submit" className={styles.submitBtn}>
+              Save Skills
             </button>
           </form>
         )}

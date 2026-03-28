@@ -1,30 +1,54 @@
 import styles from './SkillsSection.module.css';
 import { DotGrid, OutlineSquare, OverlapBoxes } from './DecorativeElements';
+import { db } from '@/lib/firebase';
+import { doc, getDoc } from 'firebase/firestore';
 
-const skillCategories = [
-    {
-        title: 'Languages',
-        skills: ['TypeScript', 'Lua', 'Python', 'JavaScript']
-    },
-    {
-        title: 'Databases',
-        skills: ['SQLite', 'PostgreSQL', 'Mongo']
-    },
-    {
-        title: 'Tools',
-        skills: ['VSCode', 'Neovim', 'Linux', 'Figma', 'Git']
-    },
-    {
-        title: 'Other',
-        skills: ['HTML', 'CSS', 'SCSS', 'REST', 'Jinja']
-    },
-    {
-        title: 'Frameworks',
-        skills: ['React', 'Next.js', 'Vue', 'Flask', 'Express.js']
+export default async function SkillsSection() {
+    let languages = '';
+    let databases = '';
+    let tools = '';
+    let frameworks = '';
+    let other = '';
+
+    try {
+        const docRef = doc(db, 'skills', 'main');
+        const docSnap = await getDoc(docRef);
+        
+        if (docSnap.exists()) {
+            const data = docSnap.data();
+            languages = data.languages || '';
+            databases = data.databases || '';
+            tools = data.tools || '';
+            frameworks = data.frameworks || '';
+            other = data.other || '';
+        }
+    } catch (error) {
+        console.error("Error fetching skills: ", error);
     }
-];
 
-export default function SkillsSection() {
+    const skillCategories = [
+        {
+            title: 'Languages',
+            skills: languages ? languages.split(',').map(s => s.trim()) : []
+        },
+        {
+            title: 'Databases',
+            skills: databases ? databases.split(',').map(s => s.trim()) : []
+        },
+        {
+            title: 'Tools',
+            skills: tools ? tools.split(',').map(s => s.trim()) : []
+        },
+        {
+            title: 'Other',
+            skills: other ? other.split(',').map(s => s.trim()) : []
+        },
+        {
+            title: 'Frameworks',
+            skills: frameworks ? frameworks.split(',').map(s => s.trim()) : []
+        }
+    ];
+
     return (
         <section className={`container ${styles.skillsSection}`} id="about-me">
             {/* Decorative elements */}
