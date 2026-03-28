@@ -65,7 +65,6 @@ export default async function ProjectsSection() {
                                 </div>
                                 <div className={styles.projectInfo}>
                                     <h3 className={styles.projectTitle}>{project.title}</h3>
-                                    <p className={styles.projectDesc}>{project.description}</p>
                                     <div className={styles.projectLinks}>
                                         {project.liveLink && (
                                             <a href={project.liveLink} target="_blank" rel="noreferrer" className={styles.primaryBtn}>Live &lt;~&gt;</a>
