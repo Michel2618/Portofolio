@@ -7,7 +7,7 @@ import ProjectCardWrapper from './ProjectCardWrapper';
 
 export default async function ProjectsSection() {
     const projectsSnapshot = await getDocs(collection(db, 'projects'));
-    const projects = projectsSnapshot.docs.map(doc => ({
+    const projects = (projectsSnapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
     })) as Array<{
@@ -19,7 +19,11 @@ export default async function ProjectsSection() {
         githubLink: string;
         isFeatured: boolean;
         imageUrl: string;
-    }>;
+    }>).sort((a, b) => {
+        if (a.isFeatured && !b.isFeatured) return -1;
+        if (!a.isFeatured && b.isFeatured) return 1;
+        return 0;
+    });
 
     return (
         <section className={`container ${styles.projectsSection}`} id="works">
