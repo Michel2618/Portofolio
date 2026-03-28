@@ -2,8 +2,25 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from './Hero.module.css';
 import { DotGrid, OutlineSquare, OverlapBoxes } from './DecorativeElements';
+import { db } from '@/lib/firebase';
+import { collection, query, where, getDocs, limit } from 'firebase/firestore';
 
-export default function Hero() {
+export default async function Hero() {
+    let currentProject = 'my next big idea';
+    try {
+        const q = query(
+            collection(db, 'timeline'),
+            where('isActive', '==', true),
+            limit(1)
+        );
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+            currentProject = querySnapshot.docs[0].data().title;
+        }
+    } catch (error) {
+        console.error('Error fetching current timeline project:', error);
+    }
+
     return (
         <section className={`container ${styles.hero}`} id="home">
             {/* Background decorative scatter */}
@@ -42,7 +59,7 @@ export default function Hero() {
                 </div>
                 <div className={styles.codeSnippet}>
                     <span className={styles.codeGreenDot}></span>
-                    <code>Currently working on <strong>Portfolio</strong></code>
+                    <code>Currently working on <strong>{currentProject}</strong></code>
                 </div>
             </div>
         </section>

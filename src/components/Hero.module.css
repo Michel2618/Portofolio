@@ -149,12 +149,12 @@
 .codeSnippet {
     position: relative;
     z-index: 10;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.6rem;
     background: rgba(30, 34, 39, 0.88);
     backdrop-filter: blur(4px);
-    padding: 0.55rem 1rem;
+    padding: 0.55rem 1.5rem 0.55rem 1rem;
     border: 1px solid rgba(80, 250, 123, 0.25);
     border-left: 3px solid var(--accent-green);
     font-family: var(--font-fira-code), monospace;
@@ -163,8 +163,7 @@
     box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
     white-space: nowrap;
     margin-top: -1px;
-    width: 100%;
-    max-width: 300px;
+    width: fit-content;
     box-sizing: border-box;
 }
 

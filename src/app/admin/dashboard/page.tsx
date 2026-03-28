@@ -4,10 +4,10 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './dashboard.module.css';
 import { db, auth } from '@/lib/firebase';
-import { collection, addDoc, doc, setDoc, getDocs, updateDoc, getDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, setDoc, getDocs, updateDoc, getDoc, query, where } from 'firebase/firestore';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 
-type TabView = 'projects' | 'quotes' | 'contact' | 'skills';
+type TabView = 'projects' | 'quotes' | 'contact' | 'skills' | 'status';
 
 export default function AdminDashboard() {
   const router = useRouter();
@@ -47,6 +47,10 @@ export default function AdminDashboard() {
     tools: '',
     frameworks: '',
     other: ''
+  });
+
+  const [statusForm, setStatusForm] = useState({
+    currentProject: ''
   });
 
   useEffect(() => {
@@ -247,6 +251,36 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleStatusSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const q = query(collection(db, 'timeline'), where('isActive', '==', true));
+      const querySnapshot = await getDocs(q);
+      
+      const now = new Date().toISOString();
+      
+      for (const timelineDoc of querySnapshot.docs) {
+        await updateDoc(doc(db, 'timeline', timelineDoc.id), {
+          isActive: false,
+          endDate: now
+        });
+      }
+      
+      await addDoc(collection(db, 'timeline'), {
+        title: statusForm.currentProject,
+        startDate: now,
+        endDate: null,
+        isActive: true
+      });
+      
+      setStatusForm({ currentProject: '' });
+      alert('Status updated!');
+    } catch (error) {
+      console.error('Error updating status:', error);
+      alert('Error updating status.');
+    }
+  };
+
   // 4. EARLY RETURNS MUST GO HERE (After all hooks)
   if (isLoading) return <div className={styles.loading} style={{ padding: '2rem', textAlign: 'center', color: '#fff' }}>Verifying access...</div>;
   if (!isAuthorized) return null;
@@ -289,6 +323,12 @@ export default function AdminDashboard() {
             onClick={() => setActiveTab('skills')}
           >
             Skills
+          </button>
+          <button
+            className={`${styles.tabBtn} ${activeTab === 'status' ? styles.activeTab : ''}`}
+            onClick={() => setActiveTab('status')}
+          >
+            Current Status
           </button>
         </div>
 
@@ -575,6 +615,27 @@ export default function AdminDashboard() {
 
             <button type="submit" className={styles.submitBtn}>
               Save Skills
+            </button>
+          </form>
+        )}
+
+        {/* Status Tab */}
+        {activeTab === 'status' && (
+          <form className={styles.formCard} onSubmit={handleStatusSubmit}>
+            <div className={styles.formGroup}>
+              <label htmlFor="currentProject">Current Project</label>
+              <input
+                type="text"
+                id="currentProject"
+                className={styles.input}
+                value={statusForm.currentProject}
+                onChange={(e) => setStatusForm({ ...statusForm, currentProject: e.target.value })}
+                required
+              />
+            </div>
+
+            <button type="submit" className={styles.submitBtn}>
+              Update Status
             </button>
           </form>
         )}
