@@ -1,9 +1,29 @@
 :root {
-  --bg-dark: #282C33;
-  --accent-green: #50FA7B;
-  --accent-purple: #C778DD;
-  --text-primary: #FFFFFF;
-  --text-secondary: #ABB2BF;
+  /* ── Brand Colors ── */
+  --primary-green: #2AD468;
+  --primary-green-dark: #22B757;
+  --accent-red: #E63946;
+  --accent-coral: #FF8A80;
+  --accent-blue: #2D5BFF;
+  --accent-yellow: #FFD166;
+
+  /* ── Backgrounds ── */
+  --bg-light: #FFFFFF;
+  --bg-section: #F8F9FB;
+  --bg-card: #FFFFFF;
+
+  /* ── Typography ── */
+  --text-heading: #1A1A2E;
+  --text-body: #6B7280;
+  --text-light: #9CA3AF;
+
+  /* ── Borders & Shadows ── */
+  --border-light: #E5E7EB;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.10);
+
+  /* ── Layout ── */
   --navbar-height: 70px;
 }
 
@@ -17,8 +37,8 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  background-color: var(--bg-dark);
-  color: var(--text-primary);
+  background-color: var(--bg-light);
+  color: var(--text-body);
   font-family: var(--font-inter), sans-serif;
   scroll-behavior: smooth;
   padding-top: var(--navbar-height);
@@ -29,7 +49,12 @@ h2,
 h3,
 h4,
 h5,
-h6,
+h6 {
+  font-family: var(--font-inter), sans-serif;
+  color: var(--text-heading);
+  font-weight: 700;
+}
+
 .font-mono {
   font-family: var(--font-fira-code), monospace;
 }
@@ -41,7 +66,7 @@ a {
 }
 
 a:hover {
-  color: var(--text-secondary);
+  color: var(--primary-green);
 }
 
 .container {
@@ -57,7 +82,7 @@ a:hover {
 }
 
 .heading-accent {
-  color: var(--accent-green);
+  color: var(--primary-green);
 }
 
 /* Hide native cursor on mouse devices (custom cursor replaces it) */

@@ -1,0 +1,461 @@
+/* ═══════════════════════════════════════════════
+   Hero Section — Light Theme
+   ═══════════════════════════════════════════════ */
+
+.heroWrapper {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-light);
+}
+
+/* ── Floating Dots (Background Decoration) ── */
+
+.floatingDot {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Individual dot positions & colors */
+.dotGreen1 {
+  width: 12px;
+  height: 12px;
+  background: var(--primary-green);
+  top: 8%;
+  left: 3%;
+}
+
+.dotGreen2 {
+  width: 8px;
+  height: 8px;
+  background: var(--primary-green);
+  top: 42%;
+  left: 12%;
+}
+
+.dotGreen3 {
+  width: 10px;
+  height: 10px;
+  background: var(--primary-green);
+  bottom: 20%;
+  right: 42%;
+}
+
+.dotGreen4 {
+  width: 6px;
+  height: 6px;
+  background: var(--primary-green);
+  top: 15%;
+  right: 30%;
+}
+
+.dotBlue1 {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-blue);
+  top: 6%;
+  left: 30%;
+}
+
+.dotBlue2 {
+  width: 6px;
+  height: 6px;
+  background: var(--accent-blue);
+  top: 25%;
+  left: 20%;
+}
+
+.dotBlue3 {
+  width: 10px;
+  height: 10px;
+  background: var(--accent-blue);
+  top: 10%;
+  right: 45%;
+}
+
+.dotRed1 {
+  width: 10px;
+  height: 10px;
+  background: var(--accent-red);
+  bottom: 15%;
+  left: 5%;
+}
+
+.dotRed2 {
+  width: 6px;
+  height: 6px;
+  background: var(--accent-red);
+  top: 20%;
+  right: 15%;
+}
+
+.dotYellow1 {
+  width: 10px;
+  height: 10px;
+  background: var(--accent-yellow);
+  top: 22%;
+  left: 42%;
+}
+
+.dotYellow2 {
+  width: 6px;
+  height: 6px;
+  background: var(--accent-yellow);
+  top: 18%;
+  right: 52%;
+}
+
+.dotCoral1 {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-coral);
+  bottom: 25%;
+  left: 18%;
+}
+
+/* ── Main Hero Content ── */
+
+.heroMain {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 4rem 3rem;
+  gap: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.heroLeft {
+  flex: 1;
+  max-width: 520px;
+}
+
+.welcomeBadge {
+  display: inline-block;
+  padding: 4px 16px;
+  background: rgba(42, 212, 104, 0.12);
+  color: var(--primary-green);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 4px;
+  margin-bottom: 1.25rem;
+}
+
+.heroTitle {
+  font-size: 2.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-heading);
+  margin-bottom: 1.5rem;
+}
+
+.heroTitle .accent {
+  color: var(--primary-green);
+}
+
+.heroDescription {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-body);
+  margin-bottom: 2rem;
+  max-width: 440px;
+}
+
+/* ── CTA Buttons ── */
+
+.ctaGroup {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background-color: var(--primary-green);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  border: none;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  box-shadow: 0 4px 14px rgba(42, 212, 104, 0.3);
+}
+
+.ctaPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(42, 212, 104, 0.4);
+  background-color: var(--primary-green-dark);
+  color: #ffffff;
+}
+
+.ctaPrimary:active {
+  transform: translateY(0);
+}
+
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 24px;
+  background: transparent;
+  color: var(--text-heading);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.ctaSecondary:hover {
+  color: var(--primary-green);
+}
+
+.ctaArrow {
+  display: inline-block;
+  font-size: 1.1rem;
+  transition: transform 0.2s ease;
+}
+
+.ctaSecondary:hover .ctaArrow {
+  transform: translate(3px, -3px);
+}
+
+/* ── Status Snippet ── */
+
+.statusSnippet {
+  margin-top: 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1.25rem;
+  background: var(--bg-section);
+  border: 1px solid var(--border-light);
+  border-left: 3px solid var(--primary-green);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: var(--text-body);
+}
+
+.statusDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary-green);
+  flex-shrink: 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.statusSnippet strong {
+  color: var(--primary-green);
+  font-weight: 600;
+}
+
+/* ── Hero Right (Photo Frame) ── */
+
+.heroRight {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.photoFrame {
+  position: relative;
+  width: 340px;
+  height: 400px;
+}
+
+.photoGreenBg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 360px;
+  background: var(--primary-green);
+  border-radius: 12px;
+  z-index: 1;
+}
+
+.photoBlackBorder {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  width: 300px;
+  height: 360px;
+  border: 3px solid var(--text-heading);
+  border-radius: 12px;
+  z-index: 2;
+}
+
+.profileImageWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 360px;
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.profileImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* ── Stats Bar ── */
+
+.statsBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 4rem 4rem;
+  gap: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.statItem {
+  flex: 1;
+  text-align: center;
+  padding: 0 2rem;
+}
+
+.statItem:not(:last-child) {
+  border-right: 2px solid var(--border-light);
+}
+
+.statNumber {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-green);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.statLabel {
+  font-size: 1rem;
+  color: var(--text-body);
+  font-weight: 400;
+}
+
+/* ═══════════════════════════════════════════════
+   Responsive
+   ═══════════════════════════════════════════════ */
+
+@media (max-width: 992px) {
+  .heroMain {
+    padding: 3rem 2rem 2rem;
+    gap: 2rem;
+  }
+
+  .heroTitle {
+    font-size: 2.25rem;
+  }
+
+  .photoFrame {
+    width: 280px;
+    height: 340px;
+  }
+
+  .photoGreenBg {
+    width: 250px;
+    height: 300px;
+  }
+
+  .photoBlackBorder {
+    width: 250px;
+    height: 300px;
+    top: 25px;
+  }
+
+  .profileImageWrapper {
+    width: 250px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroMain {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1.5rem 1.5rem;
+  }
+
+  .heroLeft {
+    max-width: 100%;
+  }
+
+  .heroTitle {
+    font-size: 2rem;
+  }
+
+  .heroDescription {
+    max-width: 100%;
+  }
+
+  .ctaGroup {
+    justify-content: center;
+  }
+
+  .statusSnippet {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .photoFrame {
+    width: 260px;
+    height: 320px;
+  }
+
+  .photoGreenBg {
+    width: 230px;
+    height: 280px;
+  }
+
+  .photoBlackBorder {
+    width: 230px;
+    height: 280px;
+    top: 22px;
+  }
+
+  .profileImageWrapper {
+    width: 230px;
+    height: 280px;
+  }
+
+  .statsBar {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 1.5rem 3rem;
+  }
+
+  .statItem {
+    padding: 0;
+  }
+
+  .statItem:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 1.5rem;
+  }
+}

@@ -1,4 +1,4 @@
-import Hero from "@/components/Hero";
+import HeroSection from "@/components/HeroSection";
 import Quote from "@/components/Quote";
 import ProjectsSection from "@/components/ProjectsSection";
 import SkillsSection from "@/components/SkillsSection";
@@ -11,7 +11,7 @@ export const revalidate = 0;
 export default function Home() {
   return (
     <main>
-      <Hero />
+      <HeroSection />
       <Quote />
       <ProjectsSection />
       <SkillsSection />
