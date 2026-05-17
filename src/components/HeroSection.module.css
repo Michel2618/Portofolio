@@ -269,6 +269,7 @@
 .heroRight {
   flex: 1;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -318,6 +319,62 @@
   height: 100%;
   object-fit: cover;
   object-position: top center;
+}
+
+/* ── Follow Me On: Social Strip ── */
+
+.socialStrip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin-left: 1.5rem;
+  padding-top: 0.5rem;
+}
+
+.followText {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  color: var(--primary-green);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.followLine {
+  display: block;
+  width: 1.5px;
+  height: 60px;
+  background: var(--primary-green);
+  opacity: 0.4;
+  margin: 1rem 0;
+}
+
+.socialIcons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.socialIconLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--primary-green);
+  color: #ffffff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.socialIconLink:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(42, 212, 104, 0.35);
+  background-color: var(--primary-green-dark);
+  color: #ffffff;
 }
 
 /* ── Stats Bar ── */
@@ -420,6 +477,10 @@
   .statusSnippet {
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .socialStrip {
+    display: none;
   }
 
   .photoFrame {

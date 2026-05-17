@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { Facebook, Instagram, Linkedin } from 'lucide-react';
 import styles from './HeroSection.module.css';
 import { db } from '@/lib/firebase';
 import { collection, query, where, getDocs, limit, doc, getDoc } from 'firebase/firestore';
@@ -85,7 +86,7 @@ export default async function HeroSection() {
                     </div>
                 </div>
 
-                {/* Right Column: Photo Frame */}
+                {/* Right Column: Photo Frame + Social Strip */}
                 <div className={styles.heroRight}>
                     <div className={styles.photoFrame}>
                         <div className={styles.photoGreenBg} />
@@ -99,6 +100,41 @@ export default async function HeroSection() {
                                 className={styles.profileImage}
                                 priority
                             />
+                        </div>
+                    </div>
+
+                    {/* ── Follow Me On: Social Strip ── */}
+                    <div className={styles.socialStrip}>
+                        <span className={styles.followText}>Follow me on:</span>
+                        <span className={styles.followLine} />
+                        <div className={styles.socialIcons}>
+                            <a
+                                href="https://www.facebook.com/share/1CHxczWhCt/?mibextid=wwXIfr"
+                                className={styles.socialIconLink}
+                                aria-label="Facebook"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <Facebook size={18} />
+                            </a>
+                            <a
+                                href="https://www.instagram.com/mr_ruwishka"
+                                className={styles.socialIconLink}
+                                aria-label="Instagram"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <Instagram size={18} />
+                            </a>
+                            <a
+                                href="https://www.linkedin.com/in/michel-ruwishka/"
+                                className={styles.socialIconLink}
+                                aria-label="LinkedIn"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <Linkedin size={18} />
+                            </a>
                         </div>
                     </div>
                 </div>
