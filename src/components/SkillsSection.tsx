@@ -1,9 +1,35 @@
+import Link from 'next/link';
 import styles from './SkillsSection.module.css';
-import { DotGrid, OutlineSquare, OverlapBoxes } from './DecorativeElements';
+import ScrollReveal from './ScrollReveal';
 import { db } from '@/lib/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 
+/* ── Static skill cards matching the Figma design ── */
+const featuredSkills = [
+    {
+        icon: '💎',
+        title: 'Visual Design',
+        desc: 'Create user interface design with unique & modern ideas',
+    },
+    {
+        icon: '📐',
+        title: 'Design Prototype',
+        desc: 'Create advance design prototype with Figma apps.',
+    },
+    {
+        icon: '🔍',
+        title: 'UX Research',
+        desc: 'Create digital user products with updated ideas',
+    },
+    {
+        icon: '🚀',
+        title: 'Web Development',
+        desc: 'Build performant, responsive web apps with modern stacks',
+    },
+];
+
 export default async function SkillsSection() {
+    /* ── Fetch skills from Firebase ── */
     let languages = '';
     let databases = '';
     let tools = '';
@@ -13,7 +39,7 @@ export default async function SkillsSection() {
     try {
         const docRef = doc(db, 'skills', 'main');
         const docSnap = await getDoc(docRef);
-        
+
         if (docSnap.exists()) {
             const data = docSnap.data();
             languages = data.languages || '';
@@ -23,67 +49,104 @@ export default async function SkillsSection() {
             other = data.other || '';
         }
     } catch (error) {
-        console.error("Error fetching skills: ", error);
+        console.error('Error fetching skills: ', error);
     }
 
     const skillCategories = [
-        {
-            title: 'Languages',
-            skills: languages ? languages.split(',').map(s => s.trim()) : []
-        },
-        {
-            title: 'Databases',
-            skills: databases ? databases.split(',').map(s => s.trim()) : []
-        },
-        {
-            title: 'Tools',
-            skills: tools ? tools.split(',').map(s => s.trim()) : []
-        },
-        {
-            title: 'Other',
-            skills: other ? other.split(',').map(s => s.trim()) : []
-        },
-        {
-            title: 'Frameworks',
-            skills: frameworks ? frameworks.split(',').map(s => s.trim()) : []
-        }
-    ];
+        { title: 'Languages', skills: languages ? languages.split(',').map((s: string) => s.trim()) : [] },
+        { title: 'Databases', skills: databases ? databases.split(',').map((s: string) => s.trim()) : [] },
+        { title: 'Tools', skills: tools ? tools.split(',').map((s: string) => s.trim()) : [] },
+        { title: 'Frameworks', skills: frameworks ? frameworks.split(',').map((s: string) => s.trim()) : [] },
+        { title: 'Other', skills: other ? other.split(',').map((s: string) => s.trim()) : [] },
+    ].filter(cat => cat.skills.length > 0);
+
+    const delayClasses = [styles.delay1, styles.delay2, styles.delay3, styles.delay4, styles.delay5];
 
     return (
-        <section className={`container ${styles.skillsSection}`} id="about-me">
-            {/* Decorative elements */}
-            <OutlineSquare size={120} color="secondary" className={styles.bgSquare1} />
-            <DotGrid className={styles.bgDots1} />
-            <OverlapBoxes color="purple" className={styles.bgOverlap1} />
-            <OutlineSquare size={65} color="secondary" className={styles.bgSquare2} />
-
-            <div className={styles.sectionHeader}>
-                <h2 className="font-mono text-2xl">
-                    <span className="heading-accent">#</span>skills
-                    <span className={styles.headerLine}></span>
-                </h2>
+        <section className={styles.skillsSection} id="about-me">
+            {/* ── Decorative dots ── */}
+            <div className={styles.decoDotsTopRight}>
+                {Array.from({ length: 9 }).map((_, i) => (
+                    <span key={i} />
+                ))}
             </div>
+            <div className={styles.decoDotsBottomLeft}>
+                {Array.from({ length: 9 }).map((_, i) => (
+                    <span key={i} />
+                ))}
+            </div>
+            <span className={styles.decoDotGreen} />
+            <span className={styles.decoDotRed} />
 
-            <div className={styles.skillsContent}>
-                <div className={styles.skillsVisual}>
-                    <div className={styles.decorativeBoxes}>
-                        <div className={styles.box1}></div>
-                        <div className={styles.box2}></div>
-                        <div className={styles.box3}></div>
-                        <div className={styles.box4}></div>
+            <div className={styles.skillsInner}>
+                {/* ── Top Row: Left intro + Right featured cards ── */}
+                <div className={styles.skillsTopRow}>
+                    {/* Left Column */}
+                    <ScrollReveal
+                        className={`${styles.skillsLeft} ${styles.revealLeft}`}
+                        visibleClass={styles.visible}
+                    >
+                        <span className={styles.sectionBadge}>My Skills</span>
+
+                        <h2 className={styles.sectionTitle}>
+                            Why Hire Me For Your Next{' '}
+                            <span className={styles.accent}>Project?</span>
+                        </h2>
+
+                        <p className={styles.sectionDesc}>
+                            I&apos;m specialist in UI/UX Design. My passion is designing &amp; solving
+                            problems through user experience and research.
+                        </p>
+
+                        <Link href="#contacts" className={styles.hireMeBtn}>
+                            Hire Me
+                        </Link>
+                    </ScrollReveal>
+
+                    {/* Right Column — Featured skill cards */}
+                    <div className={styles.skillsRight}>
+                        {featuredSkills.map((skill, index) => (
+                            <ScrollReveal
+                                key={skill.title}
+                                className={`${styles.skillCard} ${styles.revealRight} ${delayClasses[index] || ''}`}
+                                visibleClass={styles.visible}
+                            >
+                                <span className={styles.skillIcon}>{skill.icon}</span>
+                                <h3 className={styles.skillCardTitle}>{skill.title}</h3>
+                                <p className={styles.skillCardDesc}>{skill.desc}</p>
+                            </ScrollReveal>
+                        ))}
                     </div>
                 </div>
 
-                <div className={styles.skillsGrid}>
-                    {skillCategories.map((category, index) => (
-                        <div key={index} className={styles.skillBox}>
-                            <h3 className={styles.skillTitle}>{category.title}</h3>
-                            <div className={styles.skillList}>
-                                {category.skills.join(', ')}
-                            </div>
+                {/* ── Bottom: Extended Skills from Firebase ── */}
+                {skillCategories.length > 0 && (
+                    <>
+                        <ScrollReveal
+                            className={`${styles.revealUp}`}
+                            visibleClass={styles.visible}
+                        >
+                            <h3 className={styles.extendedSkillsHeading}>
+                                My <span className={styles.accent}>Tech Stack</span>
+                            </h3>
+                        </ScrollReveal>
+
+                        <div className={styles.extendedSkillsGrid}>
+                            {skillCategories.map((category, index) => (
+                                <ScrollReveal
+                                    key={category.title}
+                                    className={`${styles.skillBox} ${index % 2 === 0 ? styles.revealLeft : styles.revealRight} ${delayClasses[index] || ''}`}
+                                    visibleClass={styles.visible}
+                                >
+                                    <h4 className={styles.skillBoxTitle}>{category.title}</h4>
+                                    <div className={styles.skillBoxList}>
+                                        {category.skills.join(', ')}
+                                    </div>
+                                </ScrollReveal>
+                            ))}
                         </div>
-                    ))}
-                </div>
+                    </>
+                )}
             </div>
         </section>
     );

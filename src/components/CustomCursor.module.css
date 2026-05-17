@@ -17,7 +17,7 @@
 .cursorInner::after {
     content: '';
     position: absolute;
-    background: var(--accent-green);
+    background: var(--primary-green);
     border-radius: 1px;
 }
 
@@ -44,12 +44,12 @@
     position: absolute;
     width: 4px;
     height: 4px;
-    background: var(--accent-green);
+    background: var(--primary-green);
     border-radius: 50%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 6px var(--accent-green);
+    box-shadow: 0 0 6px var(--primary-green);
 }
 
 /* ── Outer trailing ring ─────────────────────────────── */
@@ -60,13 +60,13 @@
     left: 0;
     width: 36px;
     height: 36px;
-    border: 1.5px solid var(--accent-green);
+    border: 1.5px solid var(--primary-green);
     border-radius: 50%;
     pointer-events: none;
     z-index: 99998;
     transform: translate(-50%, -50%);
     opacity: 0.5;
-    box-shadow: 0 0 10px rgba(80, 250, 123, 0.15);
+    box-shadow: 0 0 10px rgba(42, 212, 104, 0.15);
     transition: width 0.25s ease, height 0.25s ease, opacity 0.25s ease,
         border-color 0.25s ease, box-shadow 0.25s ease;
 }
@@ -79,20 +79,20 @@
 
 .cursorInner.hovering::before,
 .cursorInner.hovering::after {
-    background: var(--accent-purple);
+    background: var(--accent-blue);
 }
 
 .cursorInner.hovering .cursorDot {
-    background: var(--accent-purple);
-    box-shadow: 0 0 8px var(--accent-purple);
+    background: var(--accent-blue);
+    box-shadow: 0 0 8px var(--accent-blue);
 }
 
 .cursorOuter.hovering {
     width: 50px;
     height: 50px;
     opacity: 0.7;
-    border-color: var(--accent-purple);
-    box-shadow: 0 0 18px rgba(199, 120, 221, 0.3);
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 18px rgba(45, 91, 255, 0.3);
 }
 
 /* ── Hidden (cursor leaves viewport) ─────────────────── */
