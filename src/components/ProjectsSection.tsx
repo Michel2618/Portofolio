@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styles from './ProjectsSection.module.css';
-import { DotGrid, OutlineSquare, OverlapBoxes } from './DecorativeElements';
+import ScrollReveal from './ScrollReveal';
 import { db } from '@/lib/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import ProjectCardWrapper from './ProjectCardWrapper';
@@ -25,64 +25,135 @@ export default async function ProjectsSection() {
         return 0;
     });
 
+    const delayClasses = [styles.delay1, styles.delay2, styles.delay3, styles.delay4, styles.delay5, styles.delay6];
+
     return (
-        <section className={`container ${styles.projectsSection}`} id="works">
-            {/* Decorative elements */}
-            <OutlineSquare size={110} color="secondary" className={styles.bgSquare1} />
-            <DotGrid className={styles.bgDots1} />
-            <OverlapBoxes color="green" className={styles.bgOverlap1} />
-            <DotGrid className={styles.bgDots2} />
-            <OutlineSquare size={70} color="secondary" className={styles.bgSquare2} />
-
-            <div className={styles.sectionHeader}>
-                <h2 className="font-mono text-2xl">
-                    <span className="heading-accent">#</span>projects
-                    <span className={styles.headerLine}></span>
-                </h2>
-                <Link href="#works" className={styles.viewAll}>
-                    View all ~~&gt;
-                </Link>
+        <section className={styles.projectsSection} id="works">
+            {/* ── Decorative dots ── */}
+            <div className={styles.decoDotsRight}>
+                {Array.from({ length: 9 }).map((_, i) => (
+                    <span key={i} />
+                ))}
             </div>
+            <div className={styles.decoDotsLeft}>
+                {Array.from({ length: 9 }).map((_, i) => (
+                    <span key={i} />
+                ))}
+            </div>
+            <span className={styles.decoDotBlue} />
+            <span className={styles.decoDotGreen} />
 
-            <div className={styles.projectsGrid}>
-                {projects.length > 0 ? (
-                    projects.map(project => (
-                        <ProjectCardWrapper 
-                            key={project.id} 
-                            projectId={project.id}
-                            className={styles.projectCard}
-                        >
-                                <div className={styles.projectImage}>
-                                    {project.imageUrl ? (
-                                        <img 
-                                            src={project.imageUrl} 
-                                            alt={project.title} 
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-                                        />
-                                    ) : (
-                                        /* Placeholder for project image */
-                                        <div style={{ width: '100%', height: '100%', backgroundColor: '#2b2b2b' }} />
-                                    )}
-                                </div>
-                                <div className={styles.projectTech}>
-                                    {project.techStack}
-                                </div>
-                                <div className={styles.projectInfo}>
-                                    <h3 className={styles.projectTitle}>{project.title}</h3>
-                                    <div className={styles.projectLinks}>
-                                        {project.liveLink && (
-                                            <a href={project.liveLink} target="_blank" rel="noreferrer" className={styles.primaryBtn}>Live &lt;~&gt;</a>
-                                        )}
-                                        {project.githubLink && (
-                                            <a href={project.githubLink} target="_blank" rel="noreferrer" className={styles.primaryBtn}>GitHub &gt;=</a>
-                                        )}
-                                    </div>
-                                </div>
-                        </ProjectCardWrapper>
-                    ))
-                ) : (
-                    <p>No projects found. Check back later!</p>
-                )}
+            <div className={styles.projectsInner}>
+                <div className={styles.projectsTopRow}>
+                    {/* ── Left Column: Intro ── */}
+                    <ScrollReveal
+                        className={`${styles.projectsLeft} ${styles.revealLeft}`}
+                        visibleClass={styles.visible}
+                    >
+                        <span className={styles.sectionBadge}>Portfolio</span>
+
+                        <h2 className={styles.sectionTitle}>
+                            My Creative Works Latest{' '}
+                            <span className={styles.accent}>Projects</span>
+                        </h2>
+
+                        <p className={styles.sectionDesc}>
+                            I have selected and mentioned here some of
+                            my latest projects to share with you.
+                        </p>
+
+                        <Link href="#works" className={styles.showMoreBtn}>
+                            Show More
+                        </Link>
+                    </ScrollReveal>
+
+                    {/* ── Right Column: Project Cards ── */}
+                    <div className={styles.projectsRight}>
+                        <div className={styles.projectsGrid}>
+                            {projects.length > 0 ? (
+                                projects.map((project, index) => (
+                                    <ScrollReveal
+                                        key={project.id}
+                                        className={`${styles.revealUp} ${delayClasses[index % delayClasses.length]} ${project.isFeatured ? styles.featuredCard : ''}`}
+                                        visibleClass={styles.visible}
+                                    >
+                                        <ProjectCardWrapper
+                                            projectId={project.id}
+                                            className={styles.projectCard}
+                                        >
+                                            <div className={styles.projectImage}>
+                                                {project.imageUrl ? (
+                                                    <img
+                                                        src={project.imageUrl}
+                                                        alt={project.title}
+                                                    />
+                                                ) : (
+                                                    <div className={styles.projectImagePlaceholder}>
+                                                        No preview available
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            <div className={styles.projectBody}>
+                                                <h3 className={styles.projectTitle}>{project.title}</h3>
+
+                                                <div className={styles.projectTech}>
+                                                    {project.techStack
+                                                        .split(',')
+                                                        .map((tech: string) => tech.trim())
+                                                        .filter(Boolean)
+                                                        .map((tech: string) => (
+                                                            <span key={tech} className={styles.techTag}>
+                                                                {tech}
+                                                            </span>
+                                                        ))}
+                                                </div>
+
+                                                <div className={styles.projectLinks}>
+                                                    {project.liveLink && (
+                                                        <a
+                                                            href={project.liveLink}
+                                                            target="_blank"
+                                                            rel="noreferrer"
+                                                            className={styles.linkBtn}
+                                                            onClick={(e) => e.stopPropagation()}
+                                                        >
+                                                            <span className={styles.linkIcon}>🔗</span> Live
+                                                        </a>
+                                                    )}
+                                                    {project.githubLink && (
+                                                        <a
+                                                            href={project.githubLink}
+                                                            target="_blank"
+                                                            rel="noreferrer"
+                                                            className={styles.linkBtn}
+                                                            onClick={(e) => e.stopPropagation()}
+                                                        >
+                                                            <span className={styles.linkIcon}>⌨</span> GitHub
+                                                        </a>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </ProjectCardWrapper>
+                                    </ScrollReveal>
+                                ))
+                            ) : (
+                                <p className={styles.emptyMessage}>
+                                    No projects found. Check back later!
+                                </p>
+                            )}
+                        </div>
+
+                        {/* Navigation arrow */}
+                        {projects.length > 0 && (
+                            <div className={styles.navArrow}>
+                                <Link href="#works" className={styles.arrowBtn} aria-label="See more projects">
+                                    →
+                                </Link>
+                            </div>
+                        )}
+                    </div>
+                </div>
             </div>
         </section>
     );

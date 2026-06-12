@@ -6,6 +6,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import CustomCursor from "@/components/CustomCursor";
 import "./globals.css";
 
+export const dynamic = 'force-dynamic';
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
