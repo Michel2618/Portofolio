@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import styles from './ProjectsSection.module.css';
+import styles from './ProjectsSectionDark.module.css';
 import { DotGrid, OutlineSquare, OverlapBoxes } from './DecorativeElements';
 import { db } from '@/lib/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import ProjectCardWrapper from './ProjectCardWrapper';
 
-export default async function ProjectsSection() {
+export default async function ProjectsSectionDark() {
     const projectsSnapshot = await getDocs(collection(db, 'projects'));
     const projects = (projectsSnapshot.docs.map(doc => ({
         id: doc.id,

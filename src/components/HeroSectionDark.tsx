@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import styles from './Hero.module.css';
+import styles from './HeroSectionDark.module.css';
 import { DotGrid, OutlineSquare, OverlapBoxes } from './DecorativeElements';
 import { db } from '@/lib/firebase';
 import { collection, query, where, getDocs, limit } from 'firebase/firestore';
 
-export default async function Hero() {
+export default async function HeroSectionDark() {
     let currentProject = 'my next big idea';
     try {
         const q = query(

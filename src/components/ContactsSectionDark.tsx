@@ -1,10 +1,10 @@
-import styles from './ContactsSection.module.css';
+import styles from './ContactsSectionDark.module.css';
 import { DotGrid, OutlineSquare, OverlapBoxes } from './DecorativeElements';
 import { db } from '../lib/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import CVButton from './CVButton';
 
-export default async function ContactsSection() {
+export default async function ContactsSectionDark() {
     let contactsData: any = null;
     try {
         const docRef = doc(db, 'contact', 'main');

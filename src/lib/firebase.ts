@@ -1,6 +1,6 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, initializeFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
@@ -12,12 +12,16 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Initialize Firebase
-// We check if an app is already initialized to prevent errors during Next.js hot-reloading
+// Initialize Firebase App
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
 const auth = getAuth(app);
-const db = getFirestore(app);
+
+// Guard Firestore initialization to prevent duplicate stream errors during hot reloads
+const db = !getApps().length 
+  ? initializeFirestore(app, { experimentalForceLongPolling: true })
+  : getFirestore(app);
+
 const storage = getStorage(app);
 
 export { app, auth, db, storage };

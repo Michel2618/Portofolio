@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import styles from './AboutSection.module.css';
+import styles from './AboutSectionDark.module.css';
 import { DotGrid, OutlineSquare, OverlapBoxes } from './DecorativeElements';
 
-export default function AboutSection() {
+export default function AboutSectionDark() {
     return (
         <section className={`container ${styles.aboutSection}`} id="about-me">
             {/* Decorative elements */}
