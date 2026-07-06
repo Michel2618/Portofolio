@@ -32,26 +32,26 @@ export default async function ProjectsSectionDark() {
 
         // Injecting local mock data so the UI doesn't look empty when offline!
         projects = [
-            {
-                id: 'local-dev-1',
-                title: 'Mock Project (Local Mode)',
-                description: 'Testing the UI layout while Firebase is blocked locally.',
-                techStack: 'Next.js, React, CSS Modules',
-                liveLink: '#',
-                githubLink: '#',
-                isFeatured: true,
-                imageUrl: ''
-            },
-            {
-                id: 'local-dev-2',
-                title: 'Second Mock Project',
-                description: 'Another placeholder to check the grid spacing.',
-                techStack: 'TypeScript, Firebase',
-                liveLink: '#',
-                githubLink: '#',
-                isFeatured: false,
-                imageUrl: ''
-            }
+        {
+            id: 'local-dev-1',
+            title: 'Mock Project (Local Mode)',
+            description: 'Testing the UI layout while Firebase is blocked locally.',
+            techStack: 'Next.js, React, CSS Modules',
+            liveLink: '#',
+            githubLink: '#',
+            isFeatured: true,
+            imageUrl: ''
+        },
+        {
+            id: 'local-dev-2',
+            title: 'Second Mock Project',
+            description: 'Another placeholder to check the grid spacing.',
+            techStack: 'TypeScript, Firebase',
+            liveLink: '#',
+            githubLink: '#',
+            isFeatured: false,
+            imageUrl: ''
+        }
         ];
     }
 
