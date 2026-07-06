@@ -1,0 +1,161 @@
+.aboutSection {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative scattered elements */
+.bgDots1 {
+    position: absolute;
+    top: 5%;
+    right: 0;
+    pointer-events: none;
+}
+
+.bgSquare1 {
+    position: absolute;
+    top: 5%;
+    left: 0;
+    pointer-events: none;
+}
+
+.bgSquare2 {
+    position: absolute;
+    bottom: 10%;
+    right: 8%;
+    pointer-events: none;
+}
+
+.bgOverlap1 {
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+    pointer-events: none;
+}
+
+
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.sectionHeader h2 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 2rem;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.headerLine {
+    display: inline-block;
+    height: 1px;
+    width: 300px;
+    background-color: var(--accent-purple);
+}
+
+.aboutContent {
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+}
+
+.aboutText {
+    flex: 1;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.aboutText p {
+    color: var(--text-secondary);
+}
+
+.readMoreBtn {
+    display: inline-block;
+    margin-top: 2.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--accent-green);
+    color: var(--text-primary);
+    font-family: var(--font-fira-code), monospace;
+    transition: all 0.2s;
+    background: transparent;
+    cursor: pointer;
+}
+
+.readMoreBtn:hover {
+    background: rgba(195, 232, 141, 0.1);
+}
+
+.aboutVisual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.abstractGraphic {
+    position: relative;
+    width: 300px;
+    height: 400px;
+}
+
+.grid {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    border-bottom: 1px solid var(--accent-green);
+    border-left: 1px solid var(--accent-green);
+    background: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 19px,
+            rgba(195, 232, 141, 0.2) 20px), repeating-linear-gradient(90deg,
+            transparent,
+            transparent 19px,
+            rgba(195, 232, 141, 0.2) 20px);
+    opacity: 0.5;
+}
+
+.dot,
+.dot2,
+.dot3 {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: var(--accent-purple);
+    border-radius: 50%;
+}
+
+.dot {
+    top: 20%;
+    right: 20%;
+}
+
+.dot2 {
+    bottom: 30%;
+    left: 30%;
+    background-color: var(--accent-green);
+}
+
+.dot3 {
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+    .aboutContent {
+        flex-direction: column;
+    }
+
+    .aboutVisual {
+        display: none;
+    }
+}

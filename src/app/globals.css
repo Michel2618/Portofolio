@@ -1,10 +1,43 @@
 :root {
+  /* Dark Theme Variables */
   --bg-dark: #282C33;
   --accent-green: #50FA7B;
   --accent-purple: #C778DD;
   --text-primary: #FFFFFF;
   --text-secondary: #ABB2BF;
   --navbar-height: 70px;
+}
+
+:root[data-theme='light'] {
+  /* ── Brand Colors ── */
+  --primary-green: #2AD468;
+  --primary-green-dark: #22B757;
+  --accent-red: #E63946;
+  --accent-coral: #FF8A80;
+  --accent-blue: #2D5BFF;
+  --accent-yellow: #FFD166;
+
+  /* ── Backgrounds ── */
+  --bg-light: #FFFFFF;
+  --bg-section: #F8F9FB;
+  --bg-card: #FFFFFF;
+
+  /* ── Typography ── */
+  --text-heading: #1A1A2E;
+  --text-body: #6B7280;
+  --text-light: #9CA3AF;
+
+  /* ── Borders & Shadows ── */
+  --border-light: #E5E7EB;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.10);
+
+  /* Map old dark theme variables to new light theme ones to smoothly transition styles */
+  --bg-dark: var(--bg-light);
+  --text-primary: var(--text-heading);
+  --text-secondary: var(--text-body);
+  --accent-green: var(--primary-green);
 }
 
 * {
@@ -48,6 +81,11 @@ a:hover {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 4rem;
+}
+
+:root[data-theme='light'] .container {
+  max-width: 1280px;
+  padding: 0 3rem;
 }
 
 @media (max-width: 768px) {

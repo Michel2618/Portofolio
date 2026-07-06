@@ -11,11 +11,15 @@ export default async function Footer() {
         const docRef = doc(db, 'contact', 'main');
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            cvUrl = docSnap.data()?.cvUrl ?? null;
+            cvUrl = docSnap.data()?.cvUrl ?? '#';
         }
     } catch (error) {
         console.error('Error fetching CV URL from Firebase:', error);
+        cvUrl = '#';
     }
+
+    // Ensure we always have a fallback so the component renders
+    if (!cvUrl) cvUrl = '#';
 
     return (
         <footer className={styles.footer}>
@@ -43,14 +47,14 @@ export default async function Footer() {
                         <h3 className={styles.mediaTitle}>Media</h3>
                         <div className={styles.socialLinks}>
                             <a href="https://github.com/Michel2618" aria-label="Github"><Github size={20} /></a>
-                            <a href="#" aria-label="Figma"><Figma size={20} /></a>
-                            <a href="#" aria-label="Discord"><MessageSquare size={20} /></a>
+                            <a href="https://www.figma.com/@michelruwishka1" aria-label="Figma"><Figma size={20} /></a>
+                            <a href="https://wa.me/94711108984" aria-label="WhatsApp"><MessageSquare size={20} /></a>
                         </div>
                     </div>
                 </div>
 
                 <div className={styles.footerBottom}>
-                    <p>© Copyright 2026. Made by Michel</p>
+                    <p>© Copyright 2026-07. Made by Michel</p>
                 </div>
             </div>
         </footer>

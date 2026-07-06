@@ -1,9 +1,9 @@
-import styles from './SkillsSection.module.css';
+import styles from './SkillsSectionDark.module.css';
 import { DotGrid, OutlineSquare, OverlapBoxes } from './DecorativeElements';
 import { db } from '@/lib/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 
-export default async function SkillsSection() {
+export default async function SkillsSectionDark() {
     let languages = '';
     let databases = '';
     let tools = '';

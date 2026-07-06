@@ -1,0 +1,338 @@
+/* ═══════════════════════════════════════════════
+   Skills Section — Light Theme  "Why Hire Me"
+   ═══════════════════════════════════════════════ */
+
+.skillsSection {
+  position: relative;
+  padding: 5rem 0;
+  overflow: hidden;
+  background-color: var(--bg-light);
+}
+
+.skillsInner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+/* ── Top Layout: Left intro + Right skill cards ── */
+
+.skillsTopRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 4rem;
+}
+
+/* ── Left Column: Badge, Heading, Description, CTA ── */
+
+.skillsLeft {
+  flex: 0 0 380px;
+  max-width: 380px;
+}
+
+.sectionBadge {
+  display: inline-block;
+  padding: 4px 14px;
+  background: rgba(42, 212, 104, 0.12);
+  color: var(--primary-green);
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.sectionTitle {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-heading);
+  margin-bottom: 1.25rem;
+}
+
+.sectionTitle .accent {
+  color: var(--primary-green);
+}
+
+.sectionDesc {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-body);
+  margin-bottom: 2rem;
+}
+
+.hireMeBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  background-color: var(--primary-green);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  border: none;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  box-shadow: 0 4px 14px rgba(42, 212, 104, 0.3);
+}
+
+.hireMeBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(42, 212, 104, 0.4);
+  background-color: var(--primary-green-dark);
+  color: #fff;
+}
+
+.hireMeBtn:active {
+  transform: translateY(0);
+}
+
+/* ── Right Column: Skill Cards Grid ── */
+
+.skillsRight {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.skillCard {
+  padding: 0.5rem 0;
+}
+
+.skillIcon {
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+  display: block;
+  line-height: 1;
+}
+
+.skillCardTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 0.5rem;
+}
+
+.skillCardDesc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-body);
+}
+
+/* ── Bottom: Extended Skills Grid (from Firebase) ── */
+
+.extendedSkillsHeading {
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  text-align: center;
+}
+
+.extendedSkillsHeading .accent {
+  color: var(--primary-green);
+}
+
+.extendedSkillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.skillBox {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 1.75rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.skillBox:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-green);
+}
+
+.skillBoxTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.skillBoxList {
+  color: var(--text-body);
+  line-height: 1.8;
+  font-size: 0.9rem;
+}
+
+/* ── Decorative Dot Grids ── */
+
+.decoDotsTopRight {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 6px);
+  gap: 6px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoDotsTopRight span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+}
+
+.decoDotsBottomLeft {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 6px);
+  gap: 6px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoDotsBottomLeft span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-red);
+}
+
+.decoDotGreen {
+  position: absolute;
+  bottom: 35%;
+  right: 28%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary-green);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoDotRed {
+  position: absolute;
+  bottom: 12%;
+  right: 6%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-red);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══════════════════════════════════════════════
+   Scroll-Reveal Animations
+   ═══════════════════════════════════════════════ */
+
+.revealLeft,
+.revealRight,
+.revealUp {
+  opacity: 0;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  will-change: opacity, transform;
+}
+
+.revealLeft {
+  transform: translateX(-60px);
+}
+
+.revealRight {
+  transform: translateX(60px);
+}
+
+.revealUp {
+  transform: translateY(40px);
+}
+
+.revealLeft.visible,
+.revealRight.visible,
+.revealUp.visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Stagger delays for grid items */
+.delay1 { transition-delay: 0.1s; }
+.delay2 { transition-delay: 0.2s; }
+.delay3 { transition-delay: 0.3s; }
+.delay4 { transition-delay: 0.4s; }
+.delay5 { transition-delay: 0.5s; }
+
+/* ═══════════════════════════════════════════════
+   Responsive
+   ═══════════════════════════════════════════════ */
+
+@media (max-width: 992px) {
+  .skillsInner {
+    padding: 0 2rem;
+  }
+
+  .skillsTopRow {
+    gap: 2.5rem;
+  }
+
+  .skillsLeft {
+    flex: 0 0 300px;
+    max-width: 300px;
+  }
+
+  .sectionTitle {
+    font-size: 1.85rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .skillsSection {
+    padding: 3rem 0;
+  }
+
+  .skillsInner {
+    padding: 0 1.5rem;
+  }
+
+  .skillsTopRow {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .skillsLeft {
+    flex: none;
+    max-width: 100%;
+  }
+
+  .sectionTitle {
+    font-size: 1.75rem;
+  }
+
+  .hireMeBtn {
+    margin: 0 auto;
+  }
+
+  .skillsRight {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+
+  .extendedSkillsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .decoDotsTopRight,
+  .decoDotsBottomLeft,
+  .decoDotGreen,
+  .decoDotRed {
+    display: none;
+  }
+}

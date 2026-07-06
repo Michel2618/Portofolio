@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Fira_Code } from "next/font/google";
 import Navbar from "@/components/Navbar";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import Footer from "@/components/Footer";
 import SocialSidebar from "@/components/SocialSidebar";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -20,6 +21,9 @@ const firaCode = Fira_Code({
 export const metadata: Metadata = {
   title: "Michel Ruwishka - Personal Blog",
   description: "Personal portfolio of Michel Ruwishka, a software engineering student and front-end developer",
+  icons: {
+    icon: "/michel_site_logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -30,12 +34,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${firaCode.variable}`}>
-        <CustomCursor />
-        <SocialSidebar />
-        <Navbar />
-        {children}
-        <Footer />
-        <ScrollToTop />
+        <ThemeProvider>
+          <CustomCursor />
+          <SocialSidebar />
+          <Navbar />
+          {children}
+          <Footer />
+          <ScrollToTop />
+        </ThemeProvider>
       </body>
     </html>
   );
