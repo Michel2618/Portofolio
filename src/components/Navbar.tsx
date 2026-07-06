@@ -4,12 +4,19 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import styles from './Navbar.module.css';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
+import { useTheme } from './ThemeProvider';
 
 export default function Navbar() {
     const [visible, setVisible] = useState(true);
     const [mobileOpen, setMobileOpen] = useState(false);
     const lastScrollY = useRef(0);
+    const { theme, toggleTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -61,6 +68,14 @@ export default function Navbar() {
                     <div className={styles.languageSelector}>
                         EN <span className={styles.dropdownArrow}>▼</span>
                     </div>
+
+                    <button 
+                        onClick={toggleTheme} 
+                        aria-label="Toggle theme"
+                        style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', display: 'flex', alignItems: 'center', marginLeft: '16px' }}
+                    >
+                        {mounted ? (theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />) : <Sun size={20} style={{ opacity: 0 }} />}
+                    </button>
                 </nav>
 
                 <button

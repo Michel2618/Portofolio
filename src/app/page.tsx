@@ -1,4 +1,6 @@
 import HeroSectionDark from "@/components/HeroSectionDark";
+import HeroSectionLight from "@/components/HeroSectionLight";
+import SectionSwitcher from "@/components/SectionSwitcher";
 import QuoteDark from "@/components/QuoteDark";
 import ProjectsSectionDark from "@/components/ProjectsSectionDark";
 import SkillsSectionDark from "@/components/SkillsSectionDark";
@@ -11,7 +13,10 @@ export const revalidate = 0;
 export default function Home() {
   return (
     <main>
-      <HeroSectionDark />
+      <SectionSwitcher 
+        darkComponent={<HeroSectionDark />} 
+        lightComponent={<HeroSectionLight />} 
+      />
       <QuoteDark />
       <ProjectsSectionDark />
       <SkillsSectionDark />
