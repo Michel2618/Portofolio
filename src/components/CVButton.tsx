@@ -8,13 +8,14 @@ export default async function CVButton() {
         const docRef = doc(db, 'contact', 'main');
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            cvUrl = docSnap.data()?.cvUrl ?? null;
+            cvUrl = docSnap.data()?.cvUrl ?? '#';
         }
     } catch (error) {
         console.error('CVButton: Error fetching CV URL from Firebase:', error);
+        cvUrl = '#';
     }
 
-    if (!cvUrl) return null;
+    if (!cvUrl) cvUrl = '#';
 
     return (
         <a

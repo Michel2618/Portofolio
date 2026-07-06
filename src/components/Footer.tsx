@@ -11,11 +11,15 @@ export default async function Footer() {
         const docRef = doc(db, 'contact', 'main');
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            cvUrl = docSnap.data()?.cvUrl ?? null;
+            cvUrl = docSnap.data()?.cvUrl ?? '#';
         }
     } catch (error) {
         console.error('Error fetching CV URL from Firebase:', error);
+        cvUrl = '#';
     }
+
+    // Ensure we always have a fallback so the component renders
+    if (!cvUrl) cvUrl = '#';
 
     return (
         <footer className={styles.footer}>
