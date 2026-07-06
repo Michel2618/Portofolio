@@ -12,10 +12,18 @@ interface ProjectCardWrapperProps {
 export default function ProjectCardWrapper({ children, projectId, className }: ProjectCardWrapperProps) {
     const router = useRouter();
 
+    const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        const target = e.target as HTMLElement;
+        if (target.closest('a')) {
+            return;
+        }
+        router.push(`/projects/${projectId}`);
+    };
+
     return (
         <div 
             className={className} 
-            onClick={() => router.push(`/projects/${projectId}`)}
+            onClick={handleClick}
             style={{ cursor: 'pointer' }}
         >
             {children}
