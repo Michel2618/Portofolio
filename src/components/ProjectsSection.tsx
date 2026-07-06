@@ -3,7 +3,7 @@ import styles from './ProjectsSection.module.css';
 import ScrollReveal from './ScrollReveal';
 import { db } from '@/lib/firebase';
 import { collection, getDocs } from 'firebase/firestore';
-import ProjectCardWrapper from './ProjectCardWrapper';
+import ProjectCardWrapper, { ProjectLink } from './ProjectCardWrapper';
 
 export default async function ProjectsSection() {
     const projectsSnapshot = await getDocs(collection(db, 'projects'));
@@ -111,26 +111,14 @@ export default async function ProjectsSection() {
 
                                                 <div className={styles.projectLinks}>
                                                     {project.liveLink && (
-                                                        <a
-                                                            href={project.liveLink}
-                                                            target="_blank"
-                                                            rel="noreferrer"
-                                                            className={styles.linkBtn}
-                                                            onClick={(e) => e.stopPropagation()}
-                                                        >
+                                                        <ProjectLink href={project.liveLink} className={styles.linkBtn}>
                                                             <span className={styles.linkIcon}>🔗</span> Live
-                                                        </a>
+                                                        </ProjectLink>
                                                     )}
                                                     {project.githubLink && (
-                                                        <a
-                                                            href={project.githubLink}
-                                                            target="_blank"
-                                                            rel="noreferrer"
-                                                            className={styles.linkBtn}
-                                                            onClick={(e) => e.stopPropagation()}
-                                                        >
+                                                        <ProjectLink href={project.githubLink} className={styles.linkBtn}>
                                                             <span className={styles.linkIcon}>⌨</span> GitHub
-                                                        </a>
+                                                        </ProjectLink>
                                                     )}
                                                 </div>
                                             </div>

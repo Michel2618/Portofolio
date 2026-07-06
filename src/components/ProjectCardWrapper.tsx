@@ -22,3 +22,17 @@ export default function ProjectCardWrapper({ children, projectId, className }: P
         </div>
     );
 }
+
+export function ProjectLink({ href, children, className }: { href: string, children: ReactNode, className?: string }) {
+    return (
+        <a 
+            href={href} 
+            target="_blank" 
+            rel="noreferrer" 
+            className={className} 
+            onClick={(e) => e.stopPropagation()}
+        >
+            {children}
+        </a>
+    );
+}
