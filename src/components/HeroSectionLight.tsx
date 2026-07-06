@@ -140,21 +140,7 @@ export default async function HeroSection() {
                 </div>
             </div>
 
-            {/* ── Stats Bar ── */}
-            <div className={styles.statsBar}>
-                <div className={styles.statItem}>
-                    <div className={styles.statNumber}>80+</div>
-                    <div className={styles.statLabel}>Satisfied clients</div>
-                </div>
-                <div className={styles.statItem}>
-                    <div className={styles.statNumber}>200+</div>
-                    <div className={styles.statLabel}>Projects completed</div>
-                </div>
-                <div className={styles.statItem}>
-                    <div className={styles.statNumber}>99+</div>
-                    <div className={styles.statLabel}>Reviews given</div>
-                </div>
-            </div>
+
         </section>
     );
 }

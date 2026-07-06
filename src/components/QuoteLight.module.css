@@ -8,12 +8,10 @@
 .quoteBox {
     position: relative;
     display: inline-block;
-    background: rgba(255, 255, 255, 0.05); /* Slightly more milky white */
-    backdrop-filter: blur(40px); /* Dramatically increased blur for heavy frost */
-    -webkit-backdrop-filter: blur(40px); /* For Safari support */
-    border: 1px solid rgba(255, 255, 255, 0.15); /* Sleek border remains */
-    border-radius: 16px; /* Smooth rounded corners remain */
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow remains */
+    background: var(--bg-card); /* Consistent with other boxes */
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    box-shadow: var(--shadow-sm);
 }
 
 .quoteText {
