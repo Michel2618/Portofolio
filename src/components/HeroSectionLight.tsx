@@ -5,8 +5,8 @@ import styles from './HeroSectionLight.module.css';
 import { db } from '@/lib/firebase';
 import { collection, query, where, getDocs, limit, doc, getDoc } from 'firebase/firestore';
 
-export default async function HeroSectionLight() {
-    // --- Fetch current project status from 'timeline' collection ---
+export default async function HeroSection() {
+    // ── Fetch current project status from 'timeline' collection ──
     let currentProject = 'my next big idea';
     try {
         const q = query(
@@ -22,7 +22,7 @@ export default async function HeroSectionLight() {
         console.error('Error fetching current timeline project:', error);
     }
 
-    // --- Fetch CV download URL from 'contact/main' ---
+    // ── Fetch CV download URL from 'contact/main' ──
     let cvUrl: string | null = null;
     try {
         const docRef = doc(db, 'contact', 'main');
@@ -36,7 +36,7 @@ export default async function HeroSectionLight() {
 
     return (
         <section className={styles.heroWrapper} id="home">
-            {/* --- Floating Colored Dots Decoration --- */}
+            {/* ── Floating Colored Dots Decoration ── */}
             <span className={`${styles.floatingDot} ${styles.dotGreen1}`} />
             <span className={`${styles.floatingDot} ${styles.dotGreen2}`} />
             <span className={`${styles.floatingDot} ${styles.dotGreen3}`} />
@@ -50,7 +50,7 @@ export default async function HeroSectionLight() {
             <span className={`${styles.floatingDot} ${styles.dotYellow2}`} />
             <span className={`${styles.floatingDot} ${styles.dotCoral1}`} />
 
-            {/* --- Main Hero Content --- */}
+            {/* ── Main Hero Content ── */}
             <div className={styles.heroMain}>
                 {/* Left Column: Text & CTAs */}
                 <div className={styles.heroLeft}>
@@ -73,7 +73,7 @@ export default async function HeroSectionLight() {
 
                         <Link href="#projects" className={styles.ctaSecondary}>
                             View Portfolio{' '}
-                            <span className={styles.ctaArrow}>→</span>
+                            <span className={styles.ctaArrow}>↗</span>
                         </Link>
                     </div>
 
@@ -103,7 +103,7 @@ export default async function HeroSectionLight() {
                         </div>
                     </div>
 
-                    {/* --- Follow Me On: Social Strip --- */}
+                    {/* ── Follow Me On: Social Strip ── */}
                     <div className={styles.socialStrip}>
                         <span className={styles.followText}>Follow me on:</span>
                         <span className={styles.followLine} />
@@ -140,7 +140,7 @@ export default async function HeroSectionLight() {
                 </div>
             </div>
 
-            {/* --- Stats Bar --- */}
+            {/* ── Stats Bar ── */}
             <div className={styles.statsBar}>
                 <div className={styles.statItem}>
                     <div className={styles.statNumber}>80+</div>

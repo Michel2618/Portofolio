@@ -1,7 +1,14 @@
+'use client';
+
 import { Github, Dribbble, Figma, Linkedin, Instagram, Facebook, Youtube } from 'lucide-react';
 import styles from './SocialSidebar.module.css';
+import { useTheme } from './ThemeProvider';
 
 export default function SocialSidebar() {
+    const { theme } = useTheme();
+
+    if (theme === 'light') return null;
+
     return (
         <div className={styles.sidebar}>
             {/* L-shaped connector: horizontal arm → vertical arm → icons */}

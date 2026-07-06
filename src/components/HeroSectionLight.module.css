@@ -1,6 +1,6 @@
-/* ==========================================================================
+/* ═══════════════════════════════════════════════
    Hero Section — Light Theme
-   ========================================================================== */
+   ═══════════════════════════════════════════════ */
 
 .heroWrapper {
     position: relative;
@@ -8,7 +8,7 @@
     background-color: var(--bg-light);
 }
 
-/* --- Floating Dots (Background Decoration) --- */
+/* ── Floating Dots (Background Decoration) ── */
 
 .floatingDot {
     position: absolute;
@@ -114,7 +114,7 @@
     left: 18%;
 }
 
-/* --- Main Hero Content --- */
+/* ── Main Hero Content ── */
 
 .heroMain {
     display: flex;
@@ -164,7 +164,7 @@
     max-width: 440px;
 }
 
-/* --- CTA Buttons --- */
+/* ── CTA Buttons ── */
 
 .ctaGroup {
     display: flex;
@@ -228,7 +228,7 @@
     transform: translate(3px, -3px);
 }
 
-/* --- Status Snippet --- */
+/* ── Status Snippet ── */
 
 .statusSnippet {
     margin-top: 2rem;
@@ -271,7 +271,7 @@
     font-weight: 600;
 }
 
-/* --- Hero Right (Photo Frame) --- */
+/* ── Hero Right (Photo Frame) ── */
 
 .heroRight {
     flex: 1;
@@ -328,7 +328,7 @@
     object-position: top center;
 }
 
-/* --- Follow Me On: Social Strip --- */
+/* ── Follow Me On: Social Strip ── */
 
 .socialStrip {
     display: flex;
@@ -384,7 +384,7 @@
     color: #ffffff;
 }
 
-/* --- Stats Bar --- */
+/* ── Stats Bar ── */
 
 .statsBar {
     display: flex;
@@ -422,9 +422,9 @@
     font-weight: 400;
 }
 
-/* ==========================================================================
+/* ═══════════════════════════════════════════════
    Responsive
-   ========================================================================== */
+   ═══════════════════════════════════════════════ */
 
 @media (max-width: 992px) {
     .heroMain {
