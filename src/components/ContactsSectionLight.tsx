@@ -20,7 +20,7 @@ export default async function ContactsSectionLight() {
     const sectionTitle = contactsData?.sectionTitle || 'contacts';
     const mainText = contactsData?.mainDescription || "I'm actively looking for new opportunities in software engineering. Whether you want to collaborate on a digital platform, talk about smart home integrations, or discuss a freelance project, my inbox is always open.";
     const email = contactsData?.email || 'michelruwishka@gmail.com';
-    const discord = contactsData?.discordUsername || 'michel0468';
+    const WhatsApp = contactsData?.whatsappNumber || '+94 71 110 8984';
 
     return (
         <section className={`container ${styles.contactsSection}`} id="contacts">
@@ -52,8 +52,8 @@ export default async function ContactsSectionLight() {
                         <a href={`mailto:${email}`} className={styles.contactItem}>
                             <span className={styles.icon}>@</span> {email}
                         </a>
-                        <a href="#" className={styles.contactItem}>
-                            <span className={styles.icon}>#</span> {discord}
+                        <a href="https://wa.me/94711108984" className={styles.contactItem}>
+                            <span className={styles.icon}>✆</span> {WhatsApp}
                         </a>
 
                     </div>

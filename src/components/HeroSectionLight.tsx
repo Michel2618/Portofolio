@@ -118,7 +118,7 @@ export default async function HeroSection() {
                                 <Facebook size={18} />
                             </a>
                             <a
-                                href="https://www.instagram.com/mr_ruwishka"
+                                href="https://www.instagram.com/m.ruwishka/"
                                 className={styles.socialIconLink}
                                 aria-label="Instagram"
                                 target="_blank"

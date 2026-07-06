@@ -20,16 +20,13 @@ export default function SocialSidebar() {
                 <a href="https://github.com/Michel2618" className={styles.iconLink} aria-label="Github: https://github.com/Michel2618">
                     <Github size={24} />
                 </a>
-                <a href="#" className={styles.iconLink} aria-label="Dribbble: Add your link here">
-                    <Dribbble size={24} />
-                </a>
                 <a href="https://www.figma.com/@michelruwishka1" className={styles.iconLink} aria-label="Figma: https://www.figma.com/@michelruwishka1">
                     <Figma size={24} />
                 </a>
                 <a href="https://www.linkedin.com/in/michel-ruwishka/" className={styles.iconLink} aria-label="LinkedIn: https://www.linkedin.com/in/michel-ruwishka/">
                     <Linkedin size={24} />
                 </a>
-                <a href="https://www.instagram.com/mr_ruwishka?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" className={styles.iconLink} aria-label="Instagram: https://www.instagram.com/mr_ruwishka?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
+                <a href="https://www.instagram.com/m.ruwishka/" className={styles.iconLink} aria-label="Instagram: https://www.instagram.com/mr_ruwishka?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
                     <Instagram size={24} />
                 </a>
                 <a href="https://www.facebook.com/share/1CHxczWhCt/?mibextid=wwXIfr" className={styles.iconLink} aria-label="Facebook: https://www.facebook.com/share/1CHxczWhCt/?mibextid=wwXIfr">
