@@ -37,7 +37,7 @@ export default function Navbar() {
 
     return (
         <header className={`${styles.header} ${visible ? styles.headerVisible : styles.headerHidden}`}>
-            <div className={`container ${styles.navContainer}`}>
+            <div className={styles.navContainer}>
                 <div className={styles.logo}>
                     <Link href="/" className={styles.logoLink}>
                         <Image

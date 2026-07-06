@@ -8,7 +8,7 @@
   --navbar-height: 70px;
 }
 
-[data-theme='light'] {
+:root[data-theme='light'] {
   /* ── Brand Colors ── */
   --primary-green: #2AD468;
   --primary-green-dark: #22B757;
@@ -35,8 +35,8 @@
 
   /* Map old dark theme variables to new light theme ones to smoothly transition styles */
   --bg-dark: var(--bg-light);
-  --text-primary: var(--text-body);
-  --text-secondary: var(--text-light);
+  --text-primary: var(--text-heading);
+  --text-secondary: var(--text-body);
   --accent-green: var(--primary-green);
 }
 
@@ -81,6 +81,11 @@ a:hover {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 4rem;
+}
+
+:root[data-theme='light'] .container {
+  max-width: 1280px;
+  padding: 0 3rem;
 }
 
 @media (max-width: 768px) {

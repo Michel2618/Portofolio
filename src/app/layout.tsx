@@ -21,6 +21,9 @@ const firaCode = Fira_Code({
 export const metadata: Metadata = {
   title: "Michel Ruwishka - Personal Blog",
   description: "Personal portfolio of Michel Ruwishka, a software engineering student and front-end developer",
+  icons: {
+    icon: "/michel_site_logo.png",
+  },
 };
 
 export default function RootLayout({
