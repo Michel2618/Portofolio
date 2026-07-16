@@ -1,0 +1,120 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  border-radius: 0.5rem; /* rounded-lg */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  outline-offset: 2px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--accent-green, #50FA7B);
+  outline-offset: 2px;
+}
+
+.button:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.button svg {
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+/* Variants */
+.variantDefault {
+  background-color: var(--accent-green, #2AD468);
+  color: var(--bg-dark, #1A1A2E);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.variantDefault:hover {
+  opacity: 0.9;
+}
+
+.variantDestructive {
+  background-color: var(--accent-red, #E63946);
+  color: white;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.variantDestructive:hover {
+  opacity: 0.9;
+}
+
+.variantOutline {
+  border-color: var(--border-light, #E5E7EB);
+  background-color: var(--bg-light, transparent);
+  color: var(--text-primary);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.variantOutline:hover {
+  background-color: rgba(156, 163, 175, 0.1);
+}
+
+.variantSecondary {
+  background-color: var(--bg-card, #F1F5F9);
+  color: var(--text-primary);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.variantSecondary:hover {
+  background-color: rgba(156, 163, 175, 0.2);
+}
+
+.variantGhost {
+  background-color: transparent;
+  color: var(--text-primary);
+}
+
+.variantGhost:hover {
+  background-color: rgba(156, 163, 175, 0.1);
+}
+
+.variantLink {
+  color: var(--accent-green, #2AD468);
+  background-color: transparent;
+  text-underline-offset: 4px;
+}
+
+.variantLink:hover {
+  text-decoration: underline;
+}
+
+/* Sizes */
+.sizeDefault {
+  height: 2.25rem; /* h-9 */
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.sizeSm {
+  height: 2rem; /* h-8 */
+  border-radius: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 0.75rem; /* text-xs */
+}
+
+.sizeLg {
+  height: 2.5rem; /* h-10 */
+  border-radius: 0.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.sizeIcon {
+  height: 2.25rem;
+  width: 2.25rem;
+}

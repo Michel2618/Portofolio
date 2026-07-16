@@ -6,6 +6,9 @@ import Footer from "@/components/Footer";
 import SocialSidebar from "@/components/SocialSidebar";
 import ScrollToTop from "@/components/ScrollToTop";
 import CustomCursor from "@/components/CustomCursor";
+import { cookies } from "next/headers";
+import { UserProvider } from "@/components/UserProvider";
+import CookieConsent from "@/components/CookieConsent";
 import "./globals.css";
 
 const inter = Inter({
@@ -26,22 +29,31 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const themeCookie = cookieStore.get("theme");
+  const initialTheme = (themeCookie?.value === "dark" || themeCookie?.value === "light") 
+    ? themeCookie.value 
+    : "light";
+
   return (
-    <html lang="en" data-theme="light">
+    <html lang="en" data-theme={initialTheme}>
       <body className={`${inter.variable} ${firaCode.variable}`}>
-        <ThemeProvider>
-          <CustomCursor />
-          <SocialSidebar />
-          <Navbar />
-          {children}
-          <Footer />
-          <ScrollToTop />
-        </ThemeProvider>
+        <UserProvider>
+          <ThemeProvider initialTheme={initialTheme}>
+            <CustomCursor />
+            <SocialSidebar />
+            <Navbar />
+            {children}
+            <Footer />
+            <ScrollToTop />
+            <CookieConsent />
+          </ThemeProvider>
+        </UserProvider>
       </body>
     </html>
   );

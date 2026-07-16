@@ -1,0 +1,128 @@
+.alert {
+  position: relative;
+  width: 100%;
+  border-radius: 0.5rem; /* rounded-lg */
+  border: 1px solid;
+  padding: 1rem; /* p-4 */
+}
+
+/* Variants */
+.variantDefault {
+  border-color: var(--border-light, #E5E7EB);
+  background-color: var(--bg-card, #FFFFFF);
+  color: var(--text-primary);
+}
+
+.variantWarning {
+  border-color: rgba(245, 158, 11, 0.5); /* amber-500/50 */
+  color: #D97706; /* amber-600 */
+}
+
+.variantError {
+  border-color: rgba(239, 68, 68, 0.5); /* red-500/50 */
+  color: #DC2626; /* red-600 */
+}
+
+.variantSuccess {
+  border-color: rgba(16, 185, 129, 0.5); /* emerald-500/50 */
+  color: var(--text-primary);
+}
+
+.variantInfo {
+  border-color: rgba(59, 130, 246, 0.5); /* blue-500/50 */
+  color: #2563EB; /* blue-600 */
+}
+
+/* Sizes */
+.sizeSm {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.sizeLg {
+  padding: 1rem;
+}
+
+/* isNotification */
+.isNotification {
+  z-index: 100;
+  max-width: 400px;
+  background-color: var(--bg-card, #FFFFFF);
+  box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05));
+  border-color: var(--border-light, #E5E7EB);
+}
+
+[data-theme="dark"] .isNotification, [data-theme="dark"] .variantDefault {
+  background-color: var(--bg-dark, #1A1A2E);
+  border-color: #333;
+}
+
+/* Layout helpers for inner structure */
+.rowLayout {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rowLayoutGrow {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.rowLayoutIcon {
+  margin-right: 0.75rem;
+  display: inline-flex;
+}
+
+.rowLayoutAction {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.complexLayout {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.complexLayoutInner {
+  display: flex;
+  flex-grow: 1;
+  gap: 0.75rem;
+}
+
+.complexLayoutIcon {
+  margin-top: 0.125rem;
+  flex-shrink: 0;
+}
+
+.complexLayoutGrow {
+  flex-grow: 1;
+}
+
+.complexLayoutAction {
+  flex-shrink: 0;
+}
+
+/* Alert Parts */
+.title {
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+
+.description {
+  font-size: 0.875rem; /* text-sm */
+  color: var(--text-secondary, #6B7280);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem; /* space-y-1 */
+}
