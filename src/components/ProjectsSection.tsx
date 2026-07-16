@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import styles from './ProjectsSectionLight.module.css';
+import styles from './ProjectsSection.module.css';
 import ScrollReveal from './ScrollReveal';
 import { db } from '@/lib/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import ProjectCardWrapper from './ProjectCardWrapper';
 
-export default async function ProjectsSectionLight() {
+export default async function ProjectsSection() {
     const projectsSnapshot = await getDocs(collection(db, 'projects'));
     const projects = (projectsSnapshot.docs.map(doc => ({
         id: doc.id,
