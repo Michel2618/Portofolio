@@ -1,0 +1,82 @@
+.overlay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--bg-secondary, #f8f9fa);
+  color: var(--text-primary, #333);
+  padding: 1.5rem;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: 9999;
+  border-top: 1px solid var(--border-color, #e5e5e5);
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+[data-theme="dark"] .overlay {
+  background-color: var(--bg-secondary, #1a1a1a);
+  color: var(--text-primary, #f5f5f5);
+  border-top: 1px solid var(--border-color, #333);
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.content {
+  text-align: center;
+}
+
+.content p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+}
+
+.acceptButton {
+  background-color: var(--accent-primary, #007bff);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.acceptButton:hover {
+  background-color: var(--accent-hover, #0056b3);
+  transform: translateY(-1px);
+}
+
+.acceptButton:active {
+  transform: translateY(0);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .overlay {
+    flex-direction: row;
+    padding: 1.5rem 3rem;
+  }
+
+  .content {
+    text-align: left;
+  }
+}

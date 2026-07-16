@@ -1,6 +1,7 @@
 'use client';
 
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 type Theme = 'dark' | 'light';
 
@@ -11,15 +12,24 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('light');
+interface ThemeProviderProps {
+  children: React.ReactNode;
+  initialTheme?: Theme;
+}
 
-  React.useEffect(() => {
+export function ThemeProvider({ children, initialTheme = 'light' }: ThemeProviderProps) {
+  const [theme, setTheme] = useState<Theme>(initialTheme);
+
+  useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
+    setTheme((prevTheme) => {
+      const newTheme = prevTheme === 'dark' ? 'light' : 'dark';
+      Cookies.set('theme', newTheme, { expires: 365 });
+      return newTheme;
+    });
   };
 
   return (
