@@ -4,6 +4,7 @@ import { Github, Figma, MessageSquare } from 'lucide-react';
 import styles from './Footer.module.css';
 import { db } from '../lib/firebase';
 import { doc, getDoc } from 'firebase/firestore';
+import ScrollReveal from './ScrollReveal';
 
 export default async function Footer() {
     let cvUrl: string | null = null;
@@ -25,37 +26,43 @@ export default async function Footer() {
         <footer className={styles.footer}>
             <div className={`container ${styles.footerContainer}`}>
                 <div className={styles.footerTop}>
-                    <div className={styles.footerInfo}>
-                        <div className={styles.footerIdentity}>
-                            <div className={styles.logoWrapper}>
-                                <Image src="/michel_site_logo.png" alt="Michel Logo" width={32} height={32} />
+                    <ScrollReveal className="revealLeft" visibleClass="visible">
+                        <div className={styles.footerInfo}>
+                            <div className={styles.footerIdentity}>
+                                <div className={styles.logoWrapper}>
+                                    <Image src="/michel_site_logo.png" alt="Michel Logo" width={32} height={32} />
+                                </div>
+                                <span className={styles.name}>Michel</span>
+                                <span className={styles.email}>michelruwishka@gmail.com</span>
                             </div>
-                            <span className={styles.name}>Michel</span>
-                            <span className={styles.email}>michelruwishka@gmail.com</span>
+                            <p className={styles.title}>Web designer and full-stack developer</p>
+                            {cvUrl && (
+                                <div className={styles.cvLinkWrapper}>
+                                    <a href={cvUrl} target="_blank" rel="noopener noreferrer" className={styles.cvLink}>
+                                        Download the CV
+                                    </a>
+                                </div>
+                            )}
                         </div>
-                        <p className={styles.title}>Web designer and full-stack developer</p>
-                        {cvUrl && (
-                            <div className={styles.cvLinkWrapper}>
-                                <a href={cvUrl} target="_blank" rel="noopener noreferrer" className={styles.cvLink}>
-                                    Download the CV
-                                </a>
-                            </div>
-                        )}
-                    </div>
+                    </ScrollReveal>
 
-                    <div className={styles.footerMedia}>
-                        <h3 className={styles.mediaTitle}>Media</h3>
-                        <div className={styles.socialLinks}>
-                            <a href="https://github.com/Michel2618" aria-label="Github"><Github size={20} /></a>
-                            <a href="https://www.figma.com/@michelruwishka1" aria-label="Figma"><Figma size={20} /></a>
-                            <a href="https://wa.me/94711108984" aria-label="WhatsApp"><MessageSquare size={20} /></a>
+                    <ScrollReveal className="revealRight delay1" visibleClass="visible">
+                        <div className={styles.footerMedia}>
+                            <h3 className={styles.mediaTitle}>Media</h3>
+                            <div className={styles.socialLinks}>
+                                <a href="https://github.com/Michel2618" aria-label="Github"><Github size={20} /></a>
+                                <a href="https://www.figma.com/@michelruwishka1" aria-label="Figma"><Figma size={20} /></a>
+                                <a href="https://wa.me/94711108984" aria-label="WhatsApp"><MessageSquare size={20} /></a>
+                            </div>
                         </div>
-                    </div>
+                    </ScrollReveal>
                 </div>
 
-                <div className={styles.footerBottom}>
-                    <p>© Copyright 2026-07. Made by Michel</p>
-                </div>
+                <ScrollReveal className="revealUp delay2" visibleClass="visible">
+                    <div className={styles.footerBottom}>
+                        <p>© Copyright 2026-07. Made by Michel</p>
+                    </div>
+                </ScrollReveal>
             </div>
         </footer>
     );

@@ -7,24 +7,24 @@ import { doc, getDoc } from 'firebase/firestore';
 /* ── Static skill cards matching the Figma design ── */
 const featuredSkills = [
     {
-        icon: '💎',
-        title: 'Visual Design',
-        desc: 'Create user interface design with unique & modern ideas',
-    },
-    {
-        icon: '📐',
-        title: 'Design Prototype',
-        desc: 'Create advance design prototype with Figma apps.',
-    },
-    {
-        icon: '🔍',
-        title: 'UX Research',
-        desc: 'Create digital user products with updated ideas',
-    },
-    {
         icon: '🚀',
-        title: 'Web Development',
-        desc: 'Build performant, responsive web apps with modern stacks',
+        title: 'Full Stack Development',
+        desc: 'Build performant, responsive web apps from front to back',
+    },
+    {
+        icon: '⚙️',
+        title: 'Software Engineering',
+        desc: 'Design robust system architectures and scalable solutions',
+    },
+    {
+        icon: '💡',
+        title: 'Prototyping & IoT',
+        desc: 'Experiment with DIY electronics and smart home automations',
+    },
+    {
+        icon: '🧩',
+        title: 'Creative Problem Solving',
+        desc: 'Bridge the gap between digital software and physical technology',
     },
 ];
 
@@ -83,8 +83,8 @@ export default async function SkillsSection() {
                 <div className={styles.skillsTopRow}>
                     {/* Left Column */}
                     <ScrollReveal
-                        className={`${styles.skillsLeft} ${styles.revealLeft}`}
-                        visibleClass={styles.visible}
+                        className={`${styles.skillsLeft} revealLeft`}
+                        visibleClass="visible"
                     >
                         <span className={styles.sectionBadge}>My Skills</span>
 
@@ -94,8 +94,7 @@ export default async function SkillsSection() {
                         </h2>
 
                         <p className={styles.sectionDesc}>
-                            I&apos;m specialist in UI/UX Design. My passion is designing &amp; solving
-                            problems through user experience and research.
+                            I specialize in Full Stack Development and Software Engineering. My passion lies in solving complex problems through elegant code and hands-on prototyping.
                         </p>
 
                         <Link href="#contacts" className={styles.hireMeBtn}>
@@ -108,8 +107,8 @@ export default async function SkillsSection() {
                         {featuredSkills.map((skill, index) => (
                             <ScrollReveal
                                 key={skill.title}
-                                className={`${styles.skillCard} ${styles.revealRight} ${delayClasses[index] || ''}`}
-                                visibleClass={styles.visible}
+                                className={`${styles.skillCard} revealRight ${delayClasses[index] || ''}`}
+                                visibleClass="visible"
                             >
                                 <span className={styles.skillIcon}>{skill.icon}</span>
                                 <h3 className={styles.skillCardTitle}>{skill.title}</h3>
@@ -123,8 +122,8 @@ export default async function SkillsSection() {
                 {skillCategories.length > 0 && (
                     <>
                         <ScrollReveal
-                            className={`${styles.revealUp}`}
-                            visibleClass={styles.visible}
+                            className="revealUp"
+                            visibleClass="visible"
                         >
                             <h3 className={styles.extendedSkillsHeading}>
                                 My <span className={styles.accent}>Tech Stack</span>
@@ -135,8 +134,8 @@ export default async function SkillsSection() {
                             {skillCategories.map((category, index) => (
                                 <ScrollReveal
                                     key={category.title}
-                                    className={`${styles.skillBox} ${index % 2 === 0 ? styles.revealLeft : styles.revealRight} ${delayClasses[index] || ''}`}
-                                    visibleClass={styles.visible}
+                                    className={`${styles.skillBox} ${index % 2 === 0 ? 'revealLeft' : 'revealRight'} ${delayClasses[index] || ''}`}
+                                    visibleClass="visible"
                                 >
                                     <h4 className={styles.skillBoxTitle}>{category.title}</h4>
                                     <div className={styles.skillBoxList}>

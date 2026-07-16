@@ -1,8 +1,8 @@
 import styles from './ContactsSection.module.css';
-import { DotGrid, OutlineSquare, OverlapBoxes } from './DecorativeElements';
 import { db } from '../lib/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import CVButton from './CVButton';
+import ScrollReveal from './ScrollReveal';
 
 export default async function ContactsSection() {
     let contactsData: any = null;
@@ -24,39 +24,49 @@ export default async function ContactsSection() {
 
     return (
         <section className={`container ${styles.contactsSection}`} id="contacts">
-            {/* Decorative elements */}
-            <DotGrid className={styles.bgDots1} />
-            <OutlineSquare size={90} color="secondary" className={styles.bgSquare1} />
-            <OverlapBoxes color="purple" className={styles.bgOverlap1} />
-
-            <div className={styles.sectionHeader}>
-                <h2 className="font-mono text-2xl">
-                    <span className="heading-accent">#</span>{sectionTitle.toLowerCase()}
-                    <span className={styles.headerLine}></span>
-                </h2>
+            {/* ── Decorative dots ── */}
+            <div className={styles.decoDotsTopRight}>
+                {Array.from({ length: 9 }).map((_, i) => (
+                    <span key={i} />
+                ))}
             </div>
+            <div className={styles.decoDotsBottomLeft}>
+                {Array.from({ length: 9 }).map((_, i) => (
+                    <span key={i} />
+                ))}
+            </div>
+            <span className={styles.decoDotPurple} />
+            <span className={styles.decoDotGreen} />
 
-            <div className={styles.contactsContent}>
-                <div className={styles.contactsText}>
-                    <p>
-                        {mainText}
-                    </p>
-                    <div className={styles.cvButtonWrapper}>
-                        <CVButton />
-                    </div>
-                </div>
+            <div className={styles.contactsInner}>
+                <div className={styles.contactsContent}>
+                    <ScrollReveal className={`${styles.contactsText} revealLeft delay1`} visibleClass="visible">
+                        <span className={styles.sectionBadge}>Contact</span>
+                        <h2 className={styles.sectionTitle}>
+                            Get in <span className={styles.accent}>Touch</span>
+                        </h2>
+                        <div className={styles.sectionDesc}>
+                            <p>
+                                {mainText}
+                            </p>
+                        </div>
+                        <div className={styles.cvButtonWrapper}>
+                            <CVButton />
+                        </div>
+                    </ScrollReveal>
 
-                <div className={styles.contactsBox}>
-                    <h3 className={styles.boxTitle}>Message me here</h3>
-                    <div className={styles.contactMethods}>
-                        <a href={`mailto:${email}`} className={styles.contactItem}>
-                            <span className={styles.icon}>@</span> {email}
-                        </a>
-                        <a href="https://wa.me/94711108984" className={styles.contactItem}>
-                            <span className={styles.icon}>✆</span> {WhatsApp}
-                        </a>
+                    <ScrollReveal className={`${styles.contactsBox} revealRight delay2`} visibleClass="visible">
+                        <h3 className={styles.boxTitle}>Message me here</h3>
+                        <div className={styles.contactMethods}>
+                            <a href={`mailto:${email}`} className={styles.contactItem}>
+                                <span className={styles.icon}>@</span> {email}
+                            </a>
+                            <a href="https://wa.me/94711108984" className={styles.contactItem}>
+                                <span className={styles.icon}>✆</span> {WhatsApp}
+                            </a>
 
-                    </div>
+                        </div>
+                    </ScrollReveal>
                 </div>
             </div>
         </section>

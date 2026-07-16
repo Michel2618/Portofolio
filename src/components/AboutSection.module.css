@@ -5,57 +5,104 @@
     overflow: hidden;
 }
 
-/* Decorative scattered elements */
-.bgDots1 {
-    position: absolute;
-    top: 5%;
-    right: 0;
-    pointer-events: none;
+.aboutInner {
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
-.bgSquare1 {
-    position: absolute;
-    top: 5%;
-    left: 0;
-    pointer-events: none;
+/* ── Decorative Dot Grids ── */
+
+.decoDotsTopRight {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 6px);
+  gap: 6px;
+  pointer-events: none;
+  z-index: 0;
 }
 
-.bgSquare2 {
-    position: absolute;
-    bottom: 10%;
-    right: 8%;
-    pointer-events: none;
+.decoDotsTopRight span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-purple);
 }
 
-.bgOverlap1 {
-    position: absolute;
-    bottom: 5%;
-    left: 0;
-    pointer-events: none;
+.decoDotsBottomLeft {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 6px);
+  gap: 6px;
+  pointer-events: none;
+  z-index: 0;
 }
 
-
-.sectionHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 3rem;
+.decoDotsBottomLeft span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-green);
 }
 
-.sectionHeader h2 {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: 2rem;
-    color: var(--text-primary);
-    white-space: nowrap;
+.decoDotGreen {
+  position: absolute;
+  bottom: 35%;
+  right: 28%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary-green);
+  pointer-events: none;
+  z-index: 0;
 }
 
-.headerLine {
-    display: inline-block;
-    height: 1px;
-    width: 300px;
-    background-color: var(--accent-purple);
+.decoDotPurple {
+  position: absolute;
+  bottom: 12%;
+  right: 6%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-purple);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Header ── */
+.sectionBadge {
+  display: inline-block;
+  padding: 4px 14px;
+  background: rgba(42, 212, 104, 0.12);
+  color: var(--primary-green);
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.sectionTitle {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-heading);
+  margin-bottom: 1.25rem;
+}
+
+.sectionTitle .accent {
+  color: var(--primary-green);
+}
+
+.sectionDesc {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-body);
+  margin-bottom: 2rem;
 }
 
 .aboutContent {
@@ -150,12 +197,29 @@
     background-color: var(--text-secondary);
 }
 
+@media (max-width: 992px) {
+    .sectionTitle {
+        font-size: 1.85rem;
+    }
+}
+
 @media (max-width: 768px) {
     .aboutContent {
         flex-direction: column;
     }
 
     .aboutVisual {
+        display: none;
+    }
+
+    .sectionTitle {
+        font-size: 1.75rem;
+    }
+
+    .decoDotsTopRight,
+    .decoDotsBottomLeft,
+    .decoDotGreen,
+    .decoDotPurple {
         display: none;
     }
 }

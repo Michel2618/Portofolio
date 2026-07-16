@@ -36,7 +36,7 @@ export default function Navbar() {
     }, []);
 
     return (
-        <header className={`${styles.header} ${visible ? styles.headerVisible : styles.headerHidden}`}>
+        <header className={`${styles.header} ${visible ? styles.headerVisible : styles.headerHidden} ${styles.headerAnimate}`}>
             <div className={styles.navContainer}>
                 <div className={styles.logo}>
                     <Link href="/" className={styles.logoLink}>
@@ -45,6 +45,7 @@ export default function Navbar() {
                             alt="Michel Logo"
                             width={70}
                             height={70}
+                            priority
                             className={styles.logoImage}
                         />
                         Michel

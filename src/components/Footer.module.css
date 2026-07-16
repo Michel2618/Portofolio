@@ -55,15 +55,17 @@
 }
 
 .cvLink {
+    display: inline-block;
     font-size: 0.9rem;
     color: var(--text-secondary);
     text-decoration: underline;
     text-underline-offset: 3px;
-    transition: color 0.2s;
+    transition: all 0.2s ease;
 }
 
 .cvLink:hover {
     color: var(--text-primary);
+    transform: scale(1.05);
 }
 
 .mediaTitle {
@@ -79,12 +81,14 @@
 }
 
 .socialLinks a {
+    display: inline-flex;
     color: var(--text-secondary);
-    transition: color 0.2s;
+    transition: all 0.2s ease;
 }
 
 .socialLinks a:hover {
     color: var(--text-primary);
+    transform: scale(1.15) translateY(-2px);
 }
 
 .footerBottom {

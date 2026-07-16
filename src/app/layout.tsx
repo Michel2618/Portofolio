@@ -40,8 +40,24 @@ export default async function RootLayout({
     ? themeCookie.value 
     : "light";
 
+  const themeScript = `
+    (function() {
+      try {
+        var cookie = document.cookie.match(/(?:^|; )theme=([^;]*)/);
+        var theme = cookie ? cookie[1] : null;
+        if (!theme) {
+          var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        }
+      } catch (e) {}
+    })();
+  `;
+
   return (
-    <html lang="en" data-theme={initialTheme}>
+    <html lang="en" data-theme={initialTheme} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className={`${inter.variable} ${firaCode.variable}`}>
         <UserProvider>
           <ThemeProvider initialTheme={initialTheme}>

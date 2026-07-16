@@ -4,6 +4,7 @@ import { Facebook, Instagram, Linkedin } from 'lucide-react';
 import styles from './HeroSection.module.css';
 import { db } from '@/lib/firebase';
 import { collection, query, where, getDocs, limit, doc, getDoc } from 'firebase/firestore';
+import ScrollReveal from './ScrollReveal';
 
 export default async function HeroSection() {
     // ── Fetch current project status from 'timeline' collection ──
@@ -37,102 +38,105 @@ export default async function HeroSection() {
     return (
         <section className={styles.heroWrapper} id="home">
             {/* ── Floating Colored Dots Decoration ── */}
-            <span className={`${styles.floatingDot} ${styles.dotGreen1}`} />
-            <span className={`${styles.floatingDot} ${styles.dotGreen2}`} />
-            <span className={`${styles.floatingDot} ${styles.dotGreen3}`} />
-            <span className={`${styles.floatingDot} ${styles.dotGreen4}`} />
-            <span className={`${styles.floatingDot} ${styles.dotBlue1}`} />
-            <span className={`${styles.floatingDot} ${styles.dotBlue2}`} />
-            <span className={`${styles.floatingDot} ${styles.dotBlue3}`} />
-            <span className={`${styles.floatingDot} ${styles.dotRed1}`} />
-            <span className={`${styles.floatingDot} ${styles.dotRed2}`} />
-            <span className={`${styles.floatingDot} ${styles.dotYellow1}`} />
-            <span className={`${styles.floatingDot} ${styles.dotYellow2}`} />
-            <span className={`${styles.floatingDot} ${styles.dotCoral1}`} />
+            <span className={`${styles.floatingDot} ${styles.dotGreen1} animate-pulse`} />
+            <span className={`${styles.floatingDot} ${styles.dotGreen2} animate-float delay1`} />
+            <span className={`${styles.floatingDot} ${styles.dotGreen3} animate-pulse delay2`} />
+            <span className={`${styles.floatingDot} ${styles.dotGreen4} animate-float delay3`} />
+            <span className={`${styles.floatingDot} ${styles.dotBlue1} animate-pulse`} />
+            <span className={`${styles.floatingDot} ${styles.dotBlue2} animate-float delay2`} />
+            <span className={`${styles.floatingDot} ${styles.dotBlue3} animate-pulse delay1`} />
+            <span className={`${styles.floatingDot} ${styles.dotRed1} animate-float`} />
+            <span className={`${styles.floatingDot} ${styles.dotRed2} animate-pulse delay3`} />
+            <span className={`${styles.floatingDot} ${styles.dotYellow1} animate-float delay1`} />
+            <span className={`${styles.floatingDot} ${styles.dotYellow2} animate-pulse delay2`} />
+            <span className={`${styles.floatingDot} ${styles.dotCoral1} animate-float`} />
 
             {/* ── Main Hero Content ── */}
             <div className={styles.heroMain}>
                 {/* Left Column: Text & CTAs */}
-                <div className={styles.heroLeft}>
-                    <span className={styles.welcomeBadge}>Welcome</span>
+                <ScrollReveal className="revealLeft" visibleClass="visible">
+                    <div className={styles.heroLeft}>
+                        <span className={styles.welcomeBadge}>Welcome</span>
 
-                    <h1 className={styles.heroTitle}>
-                        I have <span className="heading-accent">Creative</span>{' '}
-                        <span className="heading-accent">Design</span> Experience
-                    </h1>
+                        <h1 className={styles.heroTitle}>
+                            I build <span className="heading-accent">Innovative</span>{' '}
+                            <span className="heading-accent">Software</span> Solutions
+                        </h1>
 
-                    <p className={styles.heroDescription}>
-                        I&apos;m Michel, a creative Product Designer. I&apos;ve been helping
-                        businesses to solve their problems with my design for 2 years.
-                    </p>
+                        <p className={styles.heroDescription}>
+                            I&apos;m Michel, a Software Engineer and Full Stack Developer with a passion for hardware prototyping. I&apos;ve been helping teams build scalable applications and bring creative technical ideas to life.
+                        </p>
 
-                    <div className={styles.ctaGroup}>
-                        <Link href="#contacts" className={styles.ctaPrimary}>
-                            Contact Me
-                        </Link>
+                        <div className={styles.ctaGroup}>
+                            <Link href="#contacts" className={styles.ctaPrimary}>
+                                Contact Me
+                            </Link>
+                        </div>
+
+                        {/* Current status snippet */}
+                        <div className={styles.statusSnippet}>
+                            <span className={styles.statusDot} />
+                            <span>
+                                Currently working on <strong>{currentProject}</strong>
+                            </span>
+                        </div>
                     </div>
-
-                    {/* Current status snippet */}
-                    <div className={styles.statusSnippet}>
-                        <span className={styles.statusDot} />
-                        <span>
-                            Currently working on <strong>{currentProject}</strong>
-                        </span>
-                    </div>
-                </div>
+                </ScrollReveal>
 
                 {/* Right Column: Photo Frame + Social Strip */}
-                <div className={styles.heroRight}>
-                    <div className={styles.photoFrame}>
-                        <div className={styles.photoGreenBg} />
-                        <div className={styles.photoBlackBorder} />
-                        <div className={styles.profileImageWrapper}>
-                            <Image
-                                src="/profile_pic.png"
-                                alt="Michel Ruwishka"
-                                width={300}
-                                height={360}
-                                className={styles.profileImage}
-                                priority
-                            />
+                <ScrollReveal className="revealRight delay1" visibleClass="visible">
+                    <div className={styles.heroRight}>
+                        <div className={`${styles.photoFrame} animate-float`}>
+                            <div className={styles.photoGreenBg} />
+                            <div className={styles.photoBlackBorder} />
+                            <div className={styles.profileImageWrapper}>
+                                <Image
+                                    src="/profile_pic.png"
+                                    alt="Michel Ruwishka"
+                                    width={300}
+                                    height={360}
+                                    className={styles.profileImage}
+                                    priority
+                                />
+                            </div>
                         </div>
-                    </div>
 
-                    {/* ── Follow Me On: Social Strip ── */}
-                    <div className={styles.socialStrip}>
-                        <span className={styles.followText}>Follow me on:</span>
-                        <span className={styles.followLine} />
-                        <div className={styles.socialIcons}>
-                            <a
-                                href="https://www.facebook.com/share/1CHxczWhCt/?mibextid=wwXIfr"
-                                className={styles.socialIconLink}
-                                aria-label="Facebook"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <Facebook size={18} />
-                            </a>
-                            <a
-                                href="https://www.instagram.com/m.ruwishka/"
-                                className={styles.socialIconLink}
-                                aria-label="Instagram"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <Instagram size={18} />
-                            </a>
-                            <a
-                                href="https://www.linkedin.com/in/michel-ruwishka/"
-                                className={styles.socialIconLink}
-                                aria-label="LinkedIn"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <Linkedin size={18} />
-                            </a>
+                        {/* ── Follow Me On: Social Strip ── */}
+                        <div className={styles.socialStrip}>
+                            <span className={styles.followText}>Follow me on:</span>
+                            <span className={styles.followLine} />
+                            <div className={styles.socialIcons}>
+                                <a
+                                    href="https://www.facebook.com/share/1CHxczWhCt/?mibextid=wwXIfr"
+                                    className={styles.socialIconLink}
+                                    aria-label="Facebook"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <Facebook size={18} />
+                                </a>
+                                <a
+                                    href="https://www.instagram.com/m.ruwishka/"
+                                    className={styles.socialIconLink}
+                                    aria-label="Instagram"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <Instagram size={18} />
+                                </a>
+                                <a
+                                    href="https://www.linkedin.com/in/michel-ruwishka/"
+                                    className={styles.socialIconLink}
+                                    aria-label="LinkedIn"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <Linkedin size={18} />
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </ScrollReveal>
             </div>
 
 

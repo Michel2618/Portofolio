@@ -5,10 +5,32 @@
     top: 0;
     left: 0;
     right: 0;
-    background-color: var(--bg-dark);
+    background-color: var(--bg-glass, rgba(40, 44, 51, 0.6)); /* fallback for older vars */
+    backdrop-filter: blur(24px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
     z-index: 100;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    transition: transform 0.35s ease, opacity 0.35s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.35s ease, opacity 0.35s ease, background-color 0.35s ease;
+}
+
+/* Water drop expansion animation */
+.headerAnimate {
+    animation: waterDropExpand 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes waterDropExpand {
+    0% {
+        clip-path: circle(0% at 50% 0);
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        clip-path: circle(150% at 50% 0);
+        opacity: 1;
+    }
 }
 
 /* Scroll-state classes toggled by JS */

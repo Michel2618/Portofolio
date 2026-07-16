@@ -21,6 +21,14 @@ export function ThemeProvider({ children, initialTheme = 'light' }: ThemeProvide
   const [theme, setTheme] = useState<Theme>(initialTheme);
 
   useEffect(() => {
+    // Sync state with DOM theme (set by layout.tsx script) to prevent overwriting
+    const currentDomTheme = document.documentElement.getAttribute('data-theme') as Theme;
+    if (currentDomTheme && currentDomTheme !== theme) {
+      setTheme(currentDomTheme);
+    }
+  }, []);
+
+  useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
