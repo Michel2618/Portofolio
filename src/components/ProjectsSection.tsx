@@ -47,19 +47,18 @@ export default async function ProjectsSection() {
                 <div className={styles.projectsTopRow}>
                     {/* ── Left Column: Intro ── */}
                     <ScrollReveal
-                        className={`${styles.projectsLeft} ${styles.revealLeft}`}
-                        visibleClass={styles.visible}
+                        className={`${styles.projectsLeft} revealLeft`}
+                        visibleClass="visible"
                     >
                         <span className={styles.sectionBadge}>Portfolio</span>
 
                         <h2 className={styles.sectionTitle}>
-                            My Creative Works Latest{' '}
+                            Featured Technical{' '}
                             <span className={styles.accent}>Projects</span>
                         </h2>
 
                         <p className={styles.sectionDesc}>
-                            I have selected and mentioned here some of
-                            my latest projects to share with you.
+                            Here is a selection of my recent work, showcasing my skills in full-stack development, prototyping, and software engineering.
                         </p>
 
                         <Link href="#works" className={styles.showMoreBtn}>
@@ -74,8 +73,8 @@ export default async function ProjectsSection() {
                                 projects.map((project, index) => (
                                     <ScrollReveal
                                         key={project.id}
-                                        className={`${styles.revealUp} ${delayClasses[index % delayClasses.length]} ${project.isFeatured ? styles.featuredCard : ''}`}
-                                        visibleClass={styles.visible}
+                                        className={`revealUp ${delayClasses[index % delayClasses.length]} ${project.isFeatured ? styles.featuredCard : ''}`}
+                                        visibleClass="visible"
                                     >
                                         <ProjectCardWrapper
                                             projectId={project.id}

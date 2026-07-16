@@ -5,50 +5,104 @@
     overflow: hidden;
 }
 
-/* Decorative scattered elements */
-.bgDots1 {
-    position: absolute;
-    top: 6%;
-    left: 0;
-    pointer-events: none;
+.contactsInner {
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
-.bgSquare1 {
-    position: absolute;
-    top: 6%;
-    right: 0;
-    pointer-events: none;
+/* ── Decorative Dot Grids ── */
+
+.decoDotsTopRight {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 6px);
+  gap: 6px;
+  pointer-events: none;
+  z-index: 0;
 }
 
-.bgOverlap1 {
-    position: absolute;
-    bottom: 8%;
-    right: 0;
-    pointer-events: none;
+.decoDotsTopRight span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-purple);
 }
 
-
-.sectionHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 3rem;
+.decoDotsBottomLeft {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 6px);
+  gap: 6px;
+  pointer-events: none;
+  z-index: 0;
 }
 
-.sectionHeader h2 {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: 2rem;
-    color: var(--text-primary);
-    white-space: nowrap;
+.decoDotsBottomLeft span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-green);
 }
 
-.headerLine {
-    display: inline-block;
-    height: 1px;
-    width: 150px;
-    background-color: var(--accent-purple);
+.decoDotGreen {
+  position: absolute;
+  bottom: 35%;
+  right: 28%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary-green);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decoDotPurple {
+  position: absolute;
+  bottom: 12%;
+  right: 6%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-purple);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Header ── */
+.sectionBadge {
+  display: inline-block;
+  padding: 4px 14px;
+  background: rgba(42, 212, 104, 0.12);
+  color: var(--primary-green);
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.sectionTitle {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-heading);
+  margin-bottom: 1.25rem;
+}
+
+.sectionTitle .accent {
+  color: var(--primary-green);
+}
+
+.sectionDesc {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-body);
+  margin-bottom: 2rem;
 }
 
 .contactsContent {
@@ -113,8 +167,25 @@
     font-weight: bold;
 }
 
+@media (max-width: 992px) {
+    .sectionTitle {
+        font-size: 1.85rem;
+    }
+}
+
 @media (max-width: 768px) {
     .contactsContent {
         flex-direction: column;
+    }
+
+    .sectionTitle {
+        font-size: 1.75rem;
+    }
+
+    .decoDotsTopRight,
+    .decoDotsBottomLeft,
+    .decoDotGreen,
+    .decoDotPurple {
+        display: none;
     }
 }
