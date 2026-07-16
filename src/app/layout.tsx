@@ -3,7 +3,7 @@ import { Inter, Fira_Code } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Footer from "@/components/Footer";
-import SocialSidebar from "@/components/SocialSidebar";
+
 import ScrollToTop from "@/components/ScrollToTop";
 import CustomCursor from "@/components/CustomCursor";
 import { cookies } from "next/headers";
@@ -46,7 +46,7 @@ export default async function RootLayout({
         <UserProvider>
           <ThemeProvider initialTheme={initialTheme}>
             <CustomCursor />
-            <SocialSidebar />
+
             <Navbar />
             {children}
             <Footer />

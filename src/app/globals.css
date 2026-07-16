@@ -1,11 +1,35 @@
 :root {
-  /* Dark Theme Variables */
+  /* Dark Theme Variables (Legacy for any remaining usage) */
   --bg-dark: #282C33;
   --accent-green: #50FA7B;
   --accent-purple: #C778DD;
   --text-primary: #FFFFFF;
   --text-secondary: #ABB2BF;
   --navbar-height: 70px;
+
+  /* ── Brand Colors (Dark Mode Defaults) ── */
+  --primary-green: #50FA7B;
+  --primary-green-dark: #40c962;
+  --accent-red: #ff5555;
+  --accent-coral: #ff7777;
+  --accent-blue: #5555ff;
+  --accent-yellow: #f1fa8c;
+
+  /* ── Backgrounds (Dark Mode Defaults) ── */
+  --bg-light: #282C33;
+  --bg-section: #21252b;
+  --bg-card: #282c34;
+
+  /* ── Typography (Dark Mode Defaults) ── */
+  --text-heading: #FFFFFF;
+  --text-body: #ABB2BF;
+  --text-light: #5c6370;
+
+  /* ── Borders & Shadows (Dark Mode Defaults) ── */
+  --border-light: #3e4451;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 :root[data-theme='light'] {

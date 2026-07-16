@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Facebook, Instagram, Linkedin } from 'lucide-react';
-import styles from './HeroSectionLight.module.css';
+import styles from './HeroSection.module.css';
 import { db } from '@/lib/firebase';
 import { collection, query, where, getDocs, limit, doc, getDoc } from 'firebase/firestore';
 
@@ -69,11 +69,6 @@ export default async function HeroSection() {
                     <div className={styles.ctaGroup}>
                         <Link href="#contacts" className={styles.ctaPrimary}>
                             Contact Me
-                        </Link>
-
-                        <Link href="#projects" className={styles.ctaSecondary}>
-                            View Portfolio{' '}
-                            <span className={styles.ctaArrow}>↗</span>
                         </Link>
                     </div>
 

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from './SkillsSectionLight.module.css';
+import styles from './SkillsSection.module.css';
 import ScrollReveal from './ScrollReveal';
 import { db } from '@/lib/firebase';
 import { doc, getDoc } from 'firebase/firestore';
@@ -28,7 +28,7 @@ const featuredSkills = [
     },
 ];
 
-export default async function SkillsSectionLight() {
+export default async function SkillsSection() {
     /* ── Fetch skills from Firebase ── */
     let languages = '';
     let databases = '';

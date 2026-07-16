@@ -1,8 +1,8 @@
-import styles from './QuoteDark.module.css';
+import styles from './Quote.module.css';
 import { db } from '../lib/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 
-export default async function QuoteDark() {
+export default async function Quote() {
     let quoteData: any = null;
     try {
         const querySnapshot = await getDocs(collection(db, 'quotes'));
