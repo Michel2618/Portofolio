@@ -21,9 +21,17 @@ const firaCode = Fira_Code({
   subsets: ["latin"],
 });
 
+// export const metadata: Metadata = {
+//   title: "Michel Ruwishka - Personal Blog",
+//   description: "Personal portfolio of Michel Ruwishka, a software engineering student and Full-Stack Developer",
+//   icons: {
+//     icon: "/michel_site_logo.png",
+//   },
+// };
+
 export const metadata: Metadata = {
-  title: "Michel Ruwishka - Personal Blog",
-  description: "Personal portfolio of Michel Ruwishka, a software engineering student and front-end developer",
+  title: "Michel Ruwishka | Full-Stack Developer",
+  description: "Personal portfolio of Michel Ruwishka, a Full-Stack Developer specializing in scalable web applications and comprehensive digital solutions.",
   icons: {
     icon: "/michel_site_logo.png",
   },
@@ -36,8 +44,8 @@ export default async function RootLayout({
 }>) {
   const cookieStore = await cookies();
   const themeCookie = cookieStore.get("theme");
-  const initialTheme = (themeCookie?.value === "dark" || themeCookie?.value === "light") 
-    ? themeCookie.value 
+  const initialTheme = (themeCookie?.value === "dark" || themeCookie?.value === "light")
+    ? themeCookie.value
     : "light";
 
   const themeScript = `
