@@ -59,7 +59,8 @@ export default async function Hero() {
                 </div>
                 <div className={styles.codeSnippet}>
                     <span className={styles.codeGreenDot}></span>
-                    <code>Currently working on <strong>{currentProject}</strong></code>
+                    {/* <code>Currently working on <strong>{currentProject}</strong></code> */}
+                    <code>Currently accelerating my <strong>{currentProject}</strong> while <strong>contributing to real-world projects</strong></code> {/* I added new part in 2026/08/26 */}
                 </div>
             </div>
         </section>
