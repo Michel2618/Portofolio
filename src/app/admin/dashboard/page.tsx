@@ -8,6 +8,14 @@ import { collection, addDoc, doc, setDoc, getDocs, updateDoc, getDoc, query, whe
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 
 type TabView = 'projects' | 'quotes' | 'contact' | 'skills' | 'status';
+type BlockType = 'text' | 'image';
+
+interface ContentBlock {
+  id: string;
+  type: BlockType;
+  value: string;
+  file?: File | null;
+}
 
 export default function AdminDashboard() {
   const router = useRouter();
@@ -26,8 +34,49 @@ export default function AdminDashboard() {
     liveLink: '',
     githubLink: '',
     isFeatured: false,
-    coverImage: null as File | null
+    coverImage: null as File | null,
+    contentBlocks: [] as ContentBlock[]
   });
+
+  const addBlock = (type: BlockType) => {
+    setProjectForm(prev => ({
+      ...prev,
+      contentBlocks: [
+        ...prev.contentBlocks,
+        { id: Math.random().toString(36).substr(2, 9), type, value: '' }
+      ]
+    }));
+  };
+
+  const removeBlock = (id: string) => {
+    setProjectForm(prev => ({
+      ...prev,
+      contentBlocks: prev.contentBlocks.filter(b => b.id !== id)
+    }));
+  };
+
+  const moveBlock = (index: number, direction: number) => {
+    const newBlocks = [...projectForm.contentBlocks];
+    if (index + direction < 0 || index + direction >= newBlocks.length) return;
+    const temp = newBlocks[index];
+    newBlocks[index] = newBlocks[index + direction];
+    newBlocks[index + direction] = temp;
+    setProjectForm(prev => ({ ...prev, contentBlocks: newBlocks }));
+  };
+
+  const updateBlockValue = (id: string, value: string) => {
+    setProjectForm(prev => ({
+      ...prev,
+      contentBlocks: prev.contentBlocks.map(b => b.id === id ? { ...b, value } : b)
+    }));
+  };
+
+  const updateBlockFile = (id: string, file: File | null) => {
+    setProjectForm(prev => ({
+      ...prev,
+      contentBlocks: prev.contentBlocks.map(b => b.id === id ? { ...b, file } : b)
+    }));
+  };
 
   const [quoteForm, setQuoteForm] = useState({
     quoteText: '',
@@ -140,6 +189,25 @@ export default function AdminDashboard() {
         imageUrl = data.secure_url;
       }
 
+      // Process content blocks (upload images if needed)
+      const processedBlocks = await Promise.all(
+        projectForm.contentBlocks.map(async (block) => {
+          if (block.type === 'image' && block.file) {
+            const formData = new FormData();
+            formData.append('file', block.file);
+            formData.append('upload_preset', 'portfolio_uploads');
+
+            const res = await fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`, {
+              method: 'POST',
+              body: formData,
+            });
+            const data = await res.json();
+            return { id: block.id, type: block.type, value: data.secure_url };
+          }
+          return { id: block.id, type: block.type, value: block.value };
+        })
+      );
+
       if (editingProjectId) {
         const updateData: any = {
           title: projectForm.title,
@@ -148,6 +216,7 @@ export default function AdminDashboard() {
           liveLink: projectForm.liveLink,
           githubLink: projectForm.githubLink,
           isFeatured: projectForm.isFeatured,
+          contentBlocks: processedBlocks
         };
         if (imageUrl) {
           updateData.imageUrl = imageUrl;
@@ -162,6 +231,7 @@ export default function AdminDashboard() {
           githubLink: projectForm.githubLink,
           isFeatured: projectForm.isFeatured,
           imageUrl: imageUrl,
+          contentBlocks: processedBlocks
         });
       }
 
@@ -172,7 +242,8 @@ export default function AdminDashboard() {
         liveLink: '',
         githubLink: '',
         isFeatured: false,
-        coverImage: null
+        coverImage: null,
+        contentBlocks: []
       });
       setEditingProjectId(null);
       (e.target as HTMLFormElement).reset();
@@ -364,15 +435,62 @@ export default function AdminDashboard() {
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="description">Project Description</label>
+              <label htmlFor="description">Short Description (for homepage cards)</label>
               <textarea
                 id="description"
                 className={styles.textarea}
                 value={projectForm.description}
                 onChange={(e) => setProjectForm({ ...projectForm, description: e.target.value })}
-                placeholder="Enter project overview..."
+                placeholder="Enter a brief summary..."
                 required
               />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label>Rich Content Blocks (for project detail page)</label>
+              <div className={styles.blocksContainer} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem' }}>
+                {projectForm.contentBlocks.map((block, index) => (
+                  <div key={block.id} className={styles.contentBlock} style={{ background: 'rgba(255,255,255,0.05)', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)' }}>
+                    <div className={styles.blockHeader} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                      <span style={{ fontWeight: 'bold', color: '#fff' }}>{block.type === 'text' ? 'Paragraph / Markdown' : 'Image'}</span>
+                      <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        <button type="button" onClick={() => moveBlock(index, -1)} disabled={index === 0} style={{ padding: '0.2rem 0.5rem' }}>↑</button>
+                        <button type="button" onClick={() => moveBlock(index, 1)} disabled={index === projectForm.contentBlocks.length - 1} style={{ padding: '0.2rem 0.5rem' }}>↓</button>
+                        <button type="button" onClick={() => removeBlock(block.id)} style={{ color: '#ff4d4d', background: 'none', border: 'none', cursor: 'pointer' }}>Remove</button>
+                      </div>
+                    </div>
+                    {block.type === 'text' ? (
+                      <textarea 
+                        className={styles.textarea}
+                        value={block.value}
+                        onChange={(e) => updateBlockValue(block.id, e.target.value)}
+                        placeholder="Supports Markdown (e.g., **bold**, [link](url))"
+                        required
+                      />
+                    ) : (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                        {block.value && !block.file && (
+                          <img src={block.value} alt="Preview" style={{ maxHeight: '150px', objectFit: 'contain', alignSelf: 'flex-start' }} />
+                        )}
+                        <input 
+                          type="file"
+                          accept="image/*"
+                          className={styles.fileInput}
+                          onChange={(e) => {
+                            const file = e.target.files ? e.target.files[0] : null;
+                            updateBlockFile(block.id, file);
+                          }}
+                          required={!block.value}
+                        />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <div className={styles.addBlockRow} style={{ display: 'flex', gap: '1rem' }}>
+                <button type="button" onClick={() => addBlock('text')} style={{ padding: '0.5rem 1rem', background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px dashed rgba(255,255,255,0.3)', borderRadius: '4px', cursor: 'pointer' }}>+ Add Text Block</button>
+                <button type="button" onClick={() => addBlock('image')} style={{ padding: '0.5rem 1rem', background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px dashed rgba(255,255,255,0.3)', borderRadius: '4px', cursor: 'pointer' }}>+ Add Image Block</button>
+              </div>
             </div>
 
             <div className={styles.formGroup}>
@@ -443,7 +561,8 @@ export default function AdminDashboard() {
                         liveLink: proj.liveLink || '',
                         githubLink: proj.githubLink || '',
                         isFeatured: proj.isFeatured || false,
-                        coverImage: null
+                        coverImage: null,
+                        contentBlocks: proj.contentBlocks || []
                       });
                       setEditingProjectId(proj.id);
                       window.scrollTo({ top: 0, behavior: 'smooth' });

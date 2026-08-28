@@ -2,6 +2,7 @@ import Link from 'next/link';
 import styles from './ProjectDetail.module.css';
 import { db } from '@/lib/firebase';
 import { doc, getDoc } from 'firebase/firestore';
+import ReactMarkdown from 'react-markdown';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -41,7 +42,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
     const imageUrl = project.imageUrl || 'https://placehold.co/1200x525/2c313a/ABB2BF?text=Project+Cover+Image';
     const liveLink = project.liveLink || '';
     const githubLink = project.githubLink || '';
-    const description = project.description || 'No description available.';
+    const contentBlocks = project.contentBlocks || [];
 
     return (
         <main>
@@ -125,12 +126,32 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
 
                 <hr className={styles.divider} />
 
-                {/* ── Long-form description ─────────────────────────────── */}
+                {/* ── Dynamic Content Blocks ─────────────────────────────── */}
                 <section className={styles.contentSection}>
-                    <h2 className={styles.contentHeading}># overview</h2>
-
                     <div className={styles.contentBody}>
-                        <p>{description}</p>
+                        {contentBlocks.map((block: any, index: number) => {
+                            if (block.type === 'text') {
+                                return (
+                                    <div key={block.id || index} style={{ marginBottom: '1.5rem' }}>
+                                        <ReactMarkdown>{block.value}</ReactMarkdown>
+                                    </div>
+                                );
+                            } else if (block.type === 'image') {
+                                return (
+                                    <div key={block.id || index} style={{ marginBottom: '1.5rem', textAlign: 'center' }}>
+                                        <img 
+                                            src={block.value} 
+                                            alt="Content image" 
+                                            style={{ maxWidth: '100%', borderRadius: '8px' }} 
+                                        />
+                                    </div>
+                                );
+                            }
+                            return null;
+                        })}
+                        {contentBlocks.length === 0 && (
+                           <p>{project.description || 'No detailed description available.'}</p>
+                        )}
                     </div>
                 </section>
 
