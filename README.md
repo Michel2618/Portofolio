@@ -1,6 +1,6 @@
-# Michel's Personal Portfolio & Admin Dashboard
+# Michel's Personal Portfolio
 
-A dynamic, full-stack personal portfolio website built with **Next.js 15 (App Router)** and **TypeScript**. This project features a completely custom, secure **Admin Dashboard** powered by **Firebase**, allowing the owner to update projects, skills, quotes, and resume details on the fly without touching any code.
+This is a personal portfolio website built with **Next.js 15 (App Router)** and **TypeScript**. This project features a completely custom, secure **Admin Dashboard** powered by **Firebase**, allowing the owner to update projects, skills, quotes, and resume details on the fly without touching any code.
 
 ## 🚀 Features
 
@@ -51,6 +51,4 @@ A dynamic, full-stack personal portfolio website built with **Next.js 15 (App Ro
    ```
    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 🔐 Admin Dashboard Access
 
-The `/admin` route is protected. Only explicitly whitelisted email addresses (configured in the `dashboard/page.tsx` file) are allowed to view and modify the database after logging in with Google via Firebase Auth.
