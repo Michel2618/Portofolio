@@ -5,6 +5,7 @@ import { useUser } from './UserProvider';
 import { Alert, AlertContent, AlertTitle, AlertDescription } from "@/components/ui/Alert"
 import { Button } from "@/components/ui/Button"
 import { X } from "lucide-react"
+import styles from './CookieConsent.module.css';
 
 export default function CookieConsent() {
   const { hasConsented, acceptCookies } = useUser();
@@ -23,15 +24,13 @@ export default function CookieConsent() {
   }
 
   return (
-    <div style={{
-      position: 'fixed',
-      bottom: '1.5rem',
-      right: '1.5rem',
-      zIndex: 9999,
-      transform: isVisible ? 'translateY(0)' : 'translateY(150%)',
-      opacity: isVisible ? 1 : 0,
-      transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-    }}>
+    <div 
+      className={styles.consentWrapper}
+      style={{
+        transform: isVisible ? 'translateY(0)' : 'translateY(150%)',
+        opacity: isVisible ? 1 : 0,
+      }}
+    >
       <Alert
         layout="complex"
         isNotification

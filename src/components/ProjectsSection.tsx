@@ -96,6 +96,12 @@ export default async function ProjectsSection() {
                                             <div className={styles.projectBody}>
                                                 <h3 className={styles.projectTitle}>{project.title}</h3>
 
+                                                {project.description && (
+                                                    <p className={styles.projectDesc}>
+                                                        {project.description}
+                                                    </p>
+                                                )}
+
                                                 <div className={styles.projectTech}>
                                                     {project.techStack
                                                         .split(',')
