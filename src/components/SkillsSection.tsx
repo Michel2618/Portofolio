@@ -7,22 +7,22 @@ import { doc, getDoc } from 'firebase/firestore';
 /* ── Static skill cards matching the Figma design ── */
 const featuredSkills = [
     {
-        icon: '🚀',
+        // icon: '🚀',
         title: 'Full Stack Development',
         desc: 'Build performant, responsive web apps from front to back',
     },
     {
-        icon: '⚙️',
+        // icon: '⚙️',
         title: 'Software Engineering',
         desc: 'Design robust system architectures and scalable solutions',
     },
     {
-        icon: '💡',
+        // icon: '💡',
         title: 'Prototyping & IoT',
         desc: 'Experiment with DIY electronics and smart home automations',
     },
     {
-        icon: '🧩',
+        // icon: '🧩',
         title: 'Creative Problem Solving',
         desc: 'Bridge the gap between digital software and physical technology',
     },
@@ -110,7 +110,7 @@ export default async function SkillsSection() {
                                 className={`${styles.skillCard} revealRight ${delayClasses[index] || ''}`}
                                 visibleClass="visible"
                             >
-                                <span className={styles.skillIcon}>{skill.icon}</span>
+                                {/* <span className={styles.skillIcon}>{skill.icon}</span> */}
                                 <h3 className={styles.skillCardTitle}>{skill.title}</h3>
                                 <p className={styles.skillCardDesc}>{skill.desc}</p>
                             </ScrollReveal>

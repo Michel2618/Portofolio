@@ -26,6 +26,7 @@ export default async function ProjectsSection() {
     });
 
     const delayClasses = [styles.delay1, styles.delay2, styles.delay3, styles.delay4, styles.delay5, styles.delay6];
+    const displayProjects = projects.slice(0, 3);
 
     return (
         <section className={styles.projectsSection} id="works">
@@ -61,7 +62,7 @@ export default async function ProjectsSection() {
                             Here is a selection of my recent work, showcasing my skills in full-stack development, prototyping, and software engineering.
                         </p>
 
-                        <Link href="#works" className={styles.showMoreBtn}>
+                        <Link href="/projects" className={styles.showMoreBtn}>
                             Show More
                         </Link>
                     </ScrollReveal>
@@ -69,8 +70,8 @@ export default async function ProjectsSection() {
                     {/* ── Right Column: Project Cards ── */}
                     <div className={styles.projectsRight}>
                         <div className={styles.projectsGrid}>
-                            {projects.length > 0 ? (
-                                projects.map((project, index) => (
+                            {displayProjects.length > 0 ? (
+                                displayProjects.map((project, index) => (
                                     <ScrollReveal
                                         key={project.id}
                                         className={`revealUp ${delayClasses[index % delayClasses.length]} ${project.isFeatured ? styles.featuredCard : ''}`}
@@ -150,7 +151,7 @@ export default async function ProjectsSection() {
                         {/* Navigation arrow */}
                         {projects.length > 0 && (
                             <div className={styles.navArrow}>
-                                <Link href="#works" className={styles.arrowBtn} aria-label="See more projects">
+                                <Link href="/projects" className={styles.arrowBtn} aria-label="See all projects">
                                     →
                                 </Link>
                             </div>

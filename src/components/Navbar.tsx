@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import styles from './Navbar.module.css';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
@@ -13,6 +14,7 @@ export default function Navbar() {
     const lastScrollY = useRef(0);
     const { theme, toggleTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
+    const pathname = usePathname();
 
     useEffect(() => {
         setMounted(true);
@@ -35,11 +37,55 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Smoothly scroll if navigating to a hash target from an external route
+    useEffect(() => {
+        if (pathname === '/' && typeof window !== 'undefined' && window.location.hash) {
+            const targetId = window.location.hash.replace('#', '');
+            if (targetId === 'home') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                const el = document.getElementById(targetId);
+                if (el) {
+                    setTimeout(() => {
+                        el.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                }
+            }
+        }
+    }, [pathname]);
+
+    const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+        setMobileOpen(false);
+        if (pathname === '/') {
+            e.preventDefault();
+            if (targetId === 'home') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.history.pushState(null, '', '/');
+            } else {
+                const el = document.getElementById(targetId);
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                    window.history.pushState(null, '', `#${targetId}`);
+                }
+            }
+        }
+    };
+
     return (
         <header className={`${styles.header} ${visible ? styles.headerVisible : styles.headerHidden} ${styles.headerAnimate}`}>
             <div className={styles.navContainer}>
                 <div className={styles.logo}>
-                    <Link href="/" className={styles.logoLink}>
+                    <Link 
+                        href="/" 
+                        className={styles.logoLink}
+                        onClick={(e) => {
+                            if (pathname === '/') {
+                                e.preventDefault();
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                                window.history.pushState(null, '', '/');
+                            }
+                        }}
+                    >
                         <Image
                             src="/michel_site_logo.png"
                             alt="Michel Logo"
@@ -53,16 +99,16 @@ export default function Navbar() {
                 </div>
 
                 <nav className={`${styles.navLinks} ${mobileOpen ? styles.navLinksOpen : ''}`}>
-                    <Link href="#home" onClick={() => setMobileOpen(false)}>
+                    <Link href="/#home" onClick={(e) => handleNavClick(e, 'home')}>
                         <span className="heading-accent">#</span>home
                     </Link>
-                    <Link href="#works" onClick={() => setMobileOpen(false)}>
+                    <Link href="/#works" onClick={(e) => handleNavClick(e, 'works')}>
                         <span className="heading-accent">#</span>works
                     </Link>
-                    <Link href="#about-me" onClick={() => setMobileOpen(false)}>
+                    <Link href="/#about-me" onClick={(e) => handleNavClick(e, 'about-me')}>
                         <span className="heading-accent">#</span>about-me
                     </Link>
-                    <Link href="#contacts" onClick={() => setMobileOpen(false)}>
+                    <Link href="/#contacts" onClick={(e) => handleNavClick(e, 'contacts')}>
                         <span className="heading-accent">#</span>contacts
                     </Link>
 
