@@ -3,10 +3,23 @@
 import { useEffect, useState, useRef } from 'react';
 import styles from './Preloader.module.css';
 
+interface TypedPart {
+  text: string;
+  type: 'plain' | 'token' | 'tokenGreen' | 'tokenBlue';
+}
+
+interface TerminalLine {
+  prompt: string;
+  parts: TypedPart[];
+  typed: string; // how many chars have been typed so far
+}
+
+type RawLine = Omit<TerminalLine, 'typed'>;
+
 /* ──────────────────────────────────────────────
    Terminal lines to "type" in sequence
    ────────────────────────────────────────────── */
-const LINES = [
+const LINES: RawLine[] = [
   { prompt: '~$', parts: [{ text: 'whoami', type: 'tokenGreen' }] },
   { prompt: '  ', parts: [{ text: 'Michel Ruwishka — Full-Stack Developer', type: 'plain' }] },
   { prompt: '~$', parts: [{ text: 'loading', type: 'tokenGreen' }, { text: ' portfolio', type: 'plain' }, { text: '.tsx', type: 'token' }] },
@@ -19,17 +32,6 @@ const LINES = [
 const TYPING_SPEED = 38;
 /** Pause between lines in ms */
 const LINE_PAUSE = 180;
-
-interface TypedPart {
-  text: string;
-  type: 'plain' | 'token' | 'tokenGreen' | 'tokenBlue';
-}
-
-interface TerminalLine {
-  prompt: string;
-  parts: TypedPart[];
-  typed: string; // how many chars have been typed so far
-}
 
 export default function Preloader() {
   const [visible, setVisible] = useState(true);
