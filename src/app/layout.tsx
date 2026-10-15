@@ -9,6 +9,7 @@ import CustomCursor from "@/components/CustomCursor";
 import { cookies } from "next/headers";
 import { UserProvider } from "@/components/UserProvider";
 import CookieConsent from "@/components/CookieConsent";
+import Preloader from "@/components/Preloader";
 import "./globals.css";
 
 const inter = Inter({
@@ -67,6 +68,7 @@ export default async function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className={`${inter.variable} ${firaCode.variable}`}>
+        <Preloader />
         <UserProvider>
           <ThemeProvider initialTheme={initialTheme}>
             <CustomCursor />
