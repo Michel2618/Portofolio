@@ -6,6 +6,9 @@
   --pl-muted: #8b949e;
   --pl-accent: #50fa7b;
   --pl-track: rgba(80, 250, 123, 0.1);
+  --pl-glow-1: rgba(80, 250, 123, 0.2);
+  --pl-glow-2: rgba(80, 250, 123, 0.6);
+  --pl-radial-inner: #252b34;
 
   position: fixed;
   inset: 0;
@@ -19,11 +22,23 @@
   user-select: none;
   -webkit-user-select: none;
   background: radial-gradient(circle at 50% 45%,
-      #252b34 0%,
+      var(--pl-radial-inner) 0%,
       var(--pl-bg) 65%);
   transition: opacity 0.6s ease, visibility 0.6s ease;
   /* Failsafe: never trap the visitor if JS stalls */
   animation: failsafe 0s linear 10s forwards;
+}
+
+[data-theme="light"] .root,
+:global([data-theme="light"]) .root {
+  --pl-bg: #f4f6f9;
+  --pl-fg: #1a1a2e;
+  --pl-muted: #6b7280;
+  --pl-accent: #22b757;
+  --pl-track: rgba(34, 183, 87, 0.15);
+  --pl-glow-1: rgba(34, 183, 87, 0.15);
+  --pl-glow-2: rgba(34, 183, 87, 0.35);
+  --pl-radial-inner: #ffffff;
 }
 
 @keyframes failsafe {
@@ -114,11 +129,11 @@
 
   0%,
   100% {
-    filter: drop-shadow(0 0 3px rgba(80, 250, 123, 0.2));
+    filter: drop-shadow(0 0 3px var(--pl-glow-1, rgba(80, 250, 123, 0.2)));
   }
 
   50% {
-    filter: drop-shadow(0 0 16px rgba(80, 250, 123, 0.6));
+    filter: drop-shadow(0 0 16px var(--pl-glow-2, rgba(80, 250, 123, 0.6)));
   }
 }
 
