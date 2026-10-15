@@ -17,6 +17,9 @@ export default function ProjectCardWrapper({ children, projectId, className }: P
         if (target.closest('a')) {
             return;
         }
+        if (typeof window !== 'undefined') {
+            window.dispatchEvent(new CustomEvent('portfolio:route-start'));
+        }
         router.push(`/projects/${projectId}`);
     };
 
